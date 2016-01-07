@@ -1,0 +1,15 @@
+# dir
+.idea
+Roll
+ClinicWithRoll
+classes
+out
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+*.class
+
+*.iml
