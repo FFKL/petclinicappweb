@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class ClinicServlet extends HttpServlet {
@@ -20,7 +21,7 @@ public class ClinicServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+        resp.setContentType("text/html; charset=cp1251");
         PrintWriter writer = resp.getWriter();
         writer.append(
                 "<!DOCTYPE html>" +
@@ -55,6 +56,7 @@ public class ClinicServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html; charset=cp1251");
         try {
             if (!req.getParameter("id").isEmpty() || !req.getParameter("name").isEmpty() || !req.getParameter("type").isEmpty() || !req.getParameter("pet").isEmpty())
                 this.clinic.addClient(Integer.parseInt(req.getParameter("id")), req.getParameter("name"), req.getParameter("type"), req.getParameter("pet"));
@@ -86,6 +88,19 @@ public class ClinicServlet extends HttpServlet {
             }
             sb.append("</table>");
         }
-        return sb.toString();
+        return decode(sb.toString());
+    }
+
+    public static String decode(String input) {
+        try {
+            if (input != null) {
+                byte[] tmp = input.getBytes("Cp1252");
+                return (new String(tmp, "Cp1251"));
+            } else {
+                return (null);
+            }
+        } catch (UnsupportedEncodingException ex) {
+            return (null);
+        }
     }
 }
