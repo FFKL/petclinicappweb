@@ -17,7 +17,6 @@ import java.util.List;
 public class ClinicServlet extends HttpServlet {
     final Clinic clinic = new Clinic();
     List<Client> searchResult;
-    String tableName;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
