@@ -23,7 +23,8 @@ public class Clinic {
     /**
      * Константы для сообщений в исключениях
      */
-    final String ID_EXCEPTION_MESSAGE = "Введенный ID не существует. Введите другой.";
+    final String ID_EXCEPTION_MESSAGE =  "Введенный ID существует. Введите другой.";
+    final String ID_EXCEPTION_MESSAGE_SEARCH = "Клиента с введенным ID не существует";
     final String WRONG_INPUT_EXCEPTION_MESSAGE = "Ввод имени содержит цифры. Введите корректное имя (Пример: Василий)";
     final String PET_TYPE_EXCEPTION_MESSAGE = "Такого питомца не существует.";
     /**
@@ -102,6 +103,16 @@ public class Clinic {
             return clientsWithCurrentName;
         }
     }
+
+    public Client findById(final int id) throws IDException {
+        for (Client c : clients) {
+            if (c.getId() == id) {
+                return c;
+            }
+        }
+        throw new IDException(ID_EXCEPTION_MESSAGE_SEARCH);
+    }
+
     /**
      * Изменение имени клиента
      * @param id ID клиента

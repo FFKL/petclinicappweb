@@ -36,7 +36,11 @@ public class ClinicCache {
     }
 
     public List<Client> searchByClientName(String clientName) throws WrongInputException {
-            return CLINIC.findByClientName(clientName);
+        return CLINIC.findByClientName(clientName);
+    }
+
+    public Client searchById(int id) throws IDException {
+        return CLINIC.findById(id);
     }
 
     public void delPet(int id) throws IDException {

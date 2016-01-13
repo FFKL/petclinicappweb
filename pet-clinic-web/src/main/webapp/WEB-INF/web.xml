@@ -41,4 +41,34 @@
         <servlet-name>AddClientServlet</servlet-name>
         <url-pattern>/clinic/create</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteClientServlet</servlet-name>
+        <servlet-class>org.petclinic.servlets.DeleteClientServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteClientServlet</servlet-name>
+        <url-pattern>/clinic/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditClientServlet</servlet-name>
+        <servlet-class>org.petclinic.servlets.EditClientServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditClientServlet</servlet-name>
+        <url-pattern>/clinic/edit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearchClientServlet</servlet-name>
+        <servlet-class>org.petclinic.servlets.SearchClientServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchClientServlet</servlet-name>
+        <url-pattern>/clinic/search</url-pattern>
+    </servlet-mapping>
 </web-app>
