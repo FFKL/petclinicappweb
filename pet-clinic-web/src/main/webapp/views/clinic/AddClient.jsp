@@ -23,7 +23,10 @@
             </td>
             <td align="right" >Pet type: </td>
             <td>
-                <input type="text" name="type">
+                <select name="type">
+                    <option value="Cat">Cat</option>
+                    <option value="Dog">Dog</option>
+                </select>
             </td>
             <td><input type="submit" align="center" value="Submit"/></td>
         </tr>
