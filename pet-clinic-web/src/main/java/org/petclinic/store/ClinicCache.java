@@ -2,6 +2,7 @@ package org.petclinic.store;
 
 import org.petclinic.petclinicapp.Client;
 import org.petclinic.petclinicapp.Clinic;
+import org.petclinic.petclinicapp.EmulationUsers.RandomParameters;
 import org.petclinic.petclinicapp.Exceptions.IDException;
 import org.petclinic.petclinicapp.Exceptions.PetTypeException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
@@ -41,10 +42,6 @@ public class ClinicCache {
 
     public Client searchById(int id) throws IDException {
         return CLINIC.findById(id);
-    }
-
-    public void delPet(int id) throws IDException {
-        CLINIC.removePet(id);
     }
 
     public void delClient(int id) throws IDException {
