@@ -2,9 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>Search</title>
 </head>
 <body>
+<h1>Search</h1>
+<hr>
 <form action="${pageContext.servletContext.contextPath}/clinic/search" method="POST">
     <table>
         <tr>

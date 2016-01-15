@@ -3,9 +3,11 @@
 
 <html>
 <head>
-    <title></title>
+    <title>Add</title>
 </head>
 <body>
+<h1>Add client</h1>
+<hr>
 <form action="${pageContext.servletContext.contextPath}/clinic/create" method="POST">
     <table>
         <tr>

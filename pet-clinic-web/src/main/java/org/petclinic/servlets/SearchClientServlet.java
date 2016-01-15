@@ -26,15 +26,17 @@ public class SearchClientServlet extends HttpServlet {
             } catch (WrongInputException e) {
                 e.printStackTrace();
             }
+        } else if (!req.getParameter("pet").isEmpty() && !searchResult.isEmpty()){
+            searchResult.clear();
         }
         if (!req.getParameter("pet").isEmpty()) {
             try {
-                List<Client> petList = this.CLINIC_CACHE.searchByPetName(req.getParameter("pet"));
+                List<Client> petSearchList = this.CLINIC_CACHE.searchByPetName(req.getParameter("pet"));
                 if (searchResult.isEmpty()) {
-                    searchResult = petList;
+                    searchResult = petSearchList;
                 }
                 else
-                    searchResult.addAll(petList);
+                    searchResult.addAll(petSearchList);
             } catch (WrongInputException e) {
                 e.printStackTrace();
             }

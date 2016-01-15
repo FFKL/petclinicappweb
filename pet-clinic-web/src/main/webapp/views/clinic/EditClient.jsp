@@ -1,9 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>Edit</title>
 </head>
 <body>
+<h1>Edit</h1>
+<hr>
 <form action="${pageContext.servletContext.contextPath}/clinic/edit" method="POST">
     <table>
         <tr>

@@ -2,9 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title></title>
+    <title>Clinic</title>
 </head>
 <body>
+<h1>Clinic</h1>
+<hr>
 <a href="${pageContext.servletContext.contextPath}/views/clinic/AddClient.jsp">Add client</a>
 <a href="${pageContext.servletContext.contextPath}/clinic/search">Search client</a>
 <table border="1">
