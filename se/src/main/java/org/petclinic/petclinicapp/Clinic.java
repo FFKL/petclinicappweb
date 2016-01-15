@@ -121,18 +121,21 @@ public class Clinic {
      * @throws IDException, если существует клиент с введенным ID
      */
     public void changeClientName(int id, String clientName) throws WrongInputException, IDException {
+        boolean comparisonId = false;
         if (!clientName.matches(CONTAINS_NO_NUMBERS_REGEXP)) {
             throw new WrongInputException(WRONG_INPUT_EXCEPTION_MESSAGE);
         }
         else {
             for (Client c : clients) {
                 if (c.getId() == id){
+                    comparisonId = true;
                     c.setClientName(clientName);
                     break;
-                } else
-                    throw new IDException(ID_EXCEPTION_MESSAGE);
+                }
             }
         }
+        if (!comparisonId)
+            throw new IDException(ID_EXCEPTION_MESSAGE);
     }
     /**
      * Изменение имени питомца
