@@ -2,7 +2,6 @@ package org.petclinic.store;
 
 import org.petclinic.petclinicapp.Client;
 import org.petclinic.petclinicapp.Clinic;
-import org.petclinic.petclinicapp.EmulationUsers.RandomParameters;
 import org.petclinic.petclinicapp.Exceptions.IDException;
 import org.petclinic.petclinicapp.Exceptions.PetTypeException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
