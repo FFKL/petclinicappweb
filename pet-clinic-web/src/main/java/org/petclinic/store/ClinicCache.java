@@ -50,4 +50,12 @@ public class ClinicCache {
     public List<Client> getClients() {
         return CLINIC.getClients();
     }
+
+    public void removeAll() {
+        CLINIC.removeAll();
+    }
+
+    public boolean isEmpty() {
+        return CLINIC.isEmpty();
+    }
 }

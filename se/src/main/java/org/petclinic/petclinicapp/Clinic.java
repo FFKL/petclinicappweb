@@ -225,8 +225,10 @@ public class Clinic {
     }
 
     public boolean isEmpty() {
-        if (clients == null)
-            return true;
-        return false;
+        return clients.isEmpty();
+    }
+
+    public void removeAll() {
+        clients.clear();
     }
 }
