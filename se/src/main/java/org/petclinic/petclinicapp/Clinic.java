@@ -185,36 +185,6 @@ public class Clinic {
         if (!comparisonId)
             throw new IDException(ID_EXCEPTION_MESSAGE);
     }
-    /**
-     * Удаление питомца
-     * @param id ID килента
-     * @throws IDException, если существует клиент с введенным ID
-     */
-    public void removePet(int id) throws IDException {
-        for (int i = 0; i < clients.size(); i++){
-            if (clients.get(i).getId() == id){
-                clients.get(i).removePet();
-                break;
-            } else {
-                throw new IDException(ID_EXCEPTION_MESSAGE);
-            }
-        }
-    }
-
-    /**
-     * Вывод списка клиентов клиники на экран
-     * В случае отсутствия питомца вместо имени питомца выводит строку "!Питомец отсутствует!"
-     */
-    public void clientList() {
-        for (Client c : clients) {
-            String petName;
-            if (c.getPet() == null)
-                petName = "!Питомец отсутствует!";
-            else
-                petName = "; Имя питомца: " +  c.getPet().getName();
-            System.out.println("ID клиента: " + c.getId() + "; Имя клиента: " + c.getClientName() + petName);
-        }
-    }
 
     /**
      * Получение листа клиентов

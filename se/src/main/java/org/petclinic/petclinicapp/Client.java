@@ -27,12 +27,7 @@ public class Client {
     public Pet getPet(){
         return this.pet;
     }
-    /**
-     * Удаление питомца
-     */
-    public void removePet() {
-        this.pet = null;
-    }
+
     /**
      * Получение ID
      */
@@ -60,12 +55,7 @@ public class Client {
      */
     @Override
     public String toString() {
-        String petName;
-        if (this.pet == null)
-            petName = "!Питомец отсутствует!";
-        else
-            petName = "; Имя питомца: " +  this.pet.getName();
-        return "ID клиента: " + this.id + "; Имя клиента: " + this.clientName  + petName;
+        return "ID клиента: " + this.id + "; Имя клиента: " + this.clientName  + "; Имя питомца: " +  this.pet.getName();
     }
 
     /**

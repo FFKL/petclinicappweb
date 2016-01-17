@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchClientServlet extends HttpServlet {
 
     private final ClinicCache CLINIC_CACHE = ClinicCache.getInstance();
 
-    private List<Client> searchResult;
+    private List<Client> searchResult = new ArrayList<Client>();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,5 +50,9 @@ public class SearchClientServlet extends HttpServlet {
         req.setAttribute("result", searchResult);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/SearchClient.jsp");
         dispatcher.forward(req, resp);
+    }
+
+    protected List<Client> getSearchResult() {
+        return this.searchResult;
     }
 }
