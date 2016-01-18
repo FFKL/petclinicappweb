@@ -36,7 +36,7 @@ public class Clinic {
      * @throws WrongInputException, если имя клиента или имя питомца содержат цифры
      * @throws IDException, если существует клиент с введенным ID
      */
-    public synchronized void addClient(final int id, String clientName) throws WrongInputException, IDException {
+    public void addClient(final int id, String clientName) throws WrongInputException, IDException {
         clients.add(new Client(id, clientName));
 
         /*Pet pet = null;
@@ -130,20 +130,21 @@ public class Clinic {
     /**
      * Изменение имени питомца
      * @param id ID клиента
-     * @param petName имя питомца
+     * @param currentPetName текущее имя питомца
      * @throws WrongInputException, если имя питомца содержит цифры
      * @throws IDException, если существует клиент с введенным ID
      */
-    public void changePetName(int id, String petName) throws WrongInputException, IDException {
+    public void changePetName(int id, String currentPetName, String newPetName) throws WrongInputException, IDException {
         boolean comparisonId = false;
-        checkCorrectInput(petName);
+        checkCorrectInput(currentPetName);
+        checkCorrectInput(newPetName);
             for (Client c : clients) {
                 if (c.getId() == id) {
                     comparisonId = true;
                     List<Pet> pets = c.getPets();
                     for (Pet p : pets) {
-                        if (p.getName().equals(petName))
-                            p.setName(petName);
+                        if (p.getName().equals(currentPetName))
+                            p.setName(newPetName);
                     }
                     break;
                 }
