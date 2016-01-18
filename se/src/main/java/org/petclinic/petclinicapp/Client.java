@@ -1,31 +1,52 @@
 package org.petclinic.petclinicapp;
 
 import org.petclinic.petclinicapp.Pets.Pet;
+import org.petclinic.petclinicapp.Pets.PetCreate;
+import org.petclinic.petclinicapp.Pets.PetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Клиент
  */
 public class Client {
+    private final String FORMAT_STRING = "%s%s%s%s%s%s";
     /**
      * Переменные, хранящие ID клиента, имя клиента и питомца;
      */
     private int id = 0;
     private String clientName;
-    private Pet pet;
+    private List<Pet> petList = new ArrayList<Pet>();
     /**
      * Конструктор
      */
-    public Client(int id, String clientName, Pet pet) {
+    public Client(int id, String clientName) {
         this.id = id;
         this.clientName = clientName;
-        this.pet = pet;
+    }
+
+    public void addPet(String petType, String petName) {
+        PetType type = PetType.selectPetType(petType);
+        Pet newPet = PetCreate.createPet(type, petName);
+        petList.add(newPet);
+
+    }
+
+    public void removePet(String petName) {
+        for (int i = 0; i < petList.size(); i++) {
+            if (petList.get(i).getName().equals(petName)) {
+                petList.remove(i);
+                break;
+            }
+        }
     }
 
     /**
      * Получение питомца
      */
-    public Pet getPet(){
-        return this.pet;
+    public List<Pet> getPets(){
+        return this.petList;
     }
 
     /**
@@ -48,6 +69,10 @@ public class Client {
         this.clientName = name;
     }
 
+    public void removeAll() {
+        this.petList.clear();
+    }
+
     /**
      * Переопределение метода toString()
      * @return строка вида ID клиента + id + Имя клиента + clientName + Имя питомца + petName.
@@ -55,7 +80,7 @@ public class Client {
      */
     @Override
     public String toString() {
-        return "ID клиента: " + this.id + "; Имя клиента: " + this.clientName  + "; Имя питомца: " +  this.pet.getName();
+        return String.format(FORMAT_STRING, "ID: ", this.id, "; ClientName: ", this.clientName, "; PetList: ", this.petList);
     }
 
     /**
@@ -75,7 +100,7 @@ public class Client {
             return false;
         }
         Client e = (Client) obj;
-        return (this.getId() == e.getId() && this.getClientName() == e.getClientName() && this.getPet().equals(e.getPet()));
+        return (this.getId() == e.getId() && this.getClientName() == e.getClientName() && this.getPets().equals(e.getPets()));
     }
 
     /**
@@ -87,7 +112,7 @@ public class Client {
         int result = 5;
         result = 31*result + this.clientName.hashCode();
         result = 31*result + this.id;
-        result = 31*result + this.getPet().hashCode();
+        result = 31*result + this.getPets().hashCode();
         return result;
     }
 }

@@ -1,10 +1,7 @@
 package org.petclinic.petclinicapp;
 
 import org.petclinic.petclinicapp.Exceptions.IDException;
-import org.petclinic.petclinicapp.Exceptions.PetTypeException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
-import org.petclinic.petclinicapp.Pets.Cat;
-import org.petclinic.petclinicapp.Pets.Dog;
 import org.petclinic.petclinicapp.Pets.Pet;
 
 import java.util.ArrayList;
@@ -26,7 +23,6 @@ public class Clinic {
     final String ID_EXCEPTION_MESSAGE =  "Введенный ID существует. Введите другой.";
     final String ID_EXCEPTION_MESSAGE_SEARCH = "Клиента с введенным ID не существует";
     final String WRONG_INPUT_EXCEPTION_MESSAGE = "Ввод имени содержит цифры. Введите корректное имя (Пример: Василий)";
-    final String PET_TYPE_EXCEPTION_MESSAGE = "Такого питомца не существует.";
     /**
      * Конструктор
      */
@@ -37,14 +33,13 @@ public class Clinic {
      * Добавление клиента
      * @param id ID клиента
      * @param clientName Имя клиента
-     * @param petType Тип питомца
-     * @param petName Имя питомца
      * @throws WrongInputException, если имя клиента или имя питомца содержат цифры
      * @throws IDException, если существует клиент с введенным ID
-     * @throws PetTypeException, если введет несуществующий тип питомца
      */
-    public synchronized void addClient(final int id, String clientName, String petType, String petName) throws WrongInputException, IDException, PetTypeException {
-        Pet pet = null;
+    public synchronized void addClient(final int id, String clientName) throws WrongInputException, IDException {
+        clients.add(new Client(id, clientName));
+
+        /*Pet pet = null;
         for (Client c : this.clients) {
             if (id == c.getId())
                 throw new IDException(ID_EXCEPTION_MESSAGE);
@@ -61,7 +56,12 @@ public class Clinic {
             else if (petType.equals("Cat"))
                 pet = new Cat(petName);
             this.clients.add(new Client(id, clientName, pet));
-        }
+        }*/
+    }
+
+    public void addPetForClient(int id, String petType, String petName) throws IDException {
+        Client client = this.findById(id);
+        client.addPet(petType, petName);
     }
 
     /**
@@ -71,18 +71,16 @@ public class Clinic {
      * @throws WrongInputException, если имя питомца содержит цифры
      */
     public List<Client> findClientsByPetName(final String petName) throws WrongInputException {
-        if (!petName.matches(CONTAINS_NO_NUMBERS_REGEXP)) {
-            throw new WrongInputException(WRONG_INPUT_EXCEPTION_MESSAGE);
+        checkCorrectInput(petName);
+        List<Client> clientsWithCurrentPet = new ArrayList<Client>();
+        for (Client c : clients) {
+            List<Pet> pets = c.getPets();
+            for (Pet p : pets) {
+                if (p.getName().equals(petName))
+                    clientsWithCurrentPet.add(c);
+            }
         }
-        else {
-                List<Client> clientsWithCurrentPet = new ArrayList<Client>();
-                for (Client c : clients) {
-                    String name = c.getPet().getName();
-                    if (name.equals(petName))
-                        clientsWithCurrentPet.add(c);
-                }
-            return clientsWithCurrentPet;
-        }
+        return clientsWithCurrentPet;
     }
     /**
      * Нахождение клиента по собственному имени
@@ -91,17 +89,13 @@ public class Clinic {
      * @throws WrongInputException, если имя клиента содержит цифры
      */
     public List<Client> findByClientName(final String clientName) throws WrongInputException {
-        if (!clientName.matches(CONTAINS_NO_NUMBERS_REGEXP)) {
-            throw new WrongInputException(WRONG_INPUT_EXCEPTION_MESSAGE);
+        checkCorrectInput(clientName);
+        List<Client> clientsWithCurrentName = new ArrayList<Client>();
+        for (Client c : clients) {
+            if (c.getClientName().equals(clientName))
+                clientsWithCurrentName.add(c);
         }
-        else {
-            List<Client> clientsWithCurrentName = new ArrayList<Client>();
-            for (Client c : clients) {
-                if (c.getClientName().equals(clientName))
-                    clientsWithCurrentName.add(c);
-            }
-            return clientsWithCurrentName;
-        }
+        return clientsWithCurrentName;
     }
 
     public Client findById(final int id) throws IDException {
@@ -122,10 +116,7 @@ public class Clinic {
      */
     public void changeClientName(int id, String clientName) throws WrongInputException, IDException {
         boolean comparisonId = false;
-        if (!clientName.matches(CONTAINS_NO_NUMBERS_REGEXP)) {
-            throw new WrongInputException(WRONG_INPUT_EXCEPTION_MESSAGE);
-        }
-        else {
+        checkCorrectInput(clientName);
             for (Client c : clients) {
                 if (c.getId() == id){
                     comparisonId = true;
@@ -133,7 +124,6 @@ public class Clinic {
                     break;
                 }
             }
-        }
         if (!comparisonId)
             throw new IDException(ID_EXCEPTION_MESSAGE);
     }
@@ -146,34 +136,42 @@ public class Clinic {
      */
     public void changePetName(int id, String petName) throws WrongInputException, IDException {
         boolean comparisonId = false;
-        if (!petName.matches(CONTAINS_NO_NUMBERS_REGEXP)) {
-            throw new WrongInputException(WRONG_INPUT_EXCEPTION_MESSAGE);
-        }
-        else {
+        checkCorrectInput(petName);
             for (Client c : clients) {
                 if (c.getId() == id) {
                     comparisonId = true;
-                    c.getPet().setName(petName);
+                    List<Pet> pets = c.getPets();
+                    for (Pet p : pets) {
+                        if (p.getName().equals(petName))
+                            p.setName(petName);
+                    }
                     break;
                 }
+            }
+        if (!comparisonId)
+            throw new IDException(ID_EXCEPTION_MESSAGE);
+    }
+
+    public void removePet(int id, String petName) throws WrongInputException, IDException {
+        boolean comparisonId = false;
+        checkCorrectInput(petName);
+        for (Client c : clients) {
+            if (c.getId() == id) {
+                comparisonId = true;
+                c.removePet(petName);
+                break;
             }
         }
         if (!comparisonId)
             throw new IDException(ID_EXCEPTION_MESSAGE);
     }
+
     /**
      * Удаление клиента
      * @param id ID клиента
      * @throws IDException, если существует клиент с введенным ID
      */
-    public synchronized void removeClient(int id) throws IDException {
-        if (clients == null)  {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    public void removeClient(int id) throws IDException {
         boolean comparisonId = false;
         for (int i = 0; i < clients.size(); i++){
             if (clients.get(i).getId() == id){
@@ -200,5 +198,11 @@ public class Clinic {
 
     public void removeAll() {
         clients.clear();
+    }
+
+    private void checkCorrectInput(String name) throws WrongInputException {
+        if (!name.matches(CONTAINS_NO_NUMBERS_REGEXP)) {
+            throw new WrongInputException(WRONG_INPUT_EXCEPTION_MESSAGE);
+        }
     }
 }
