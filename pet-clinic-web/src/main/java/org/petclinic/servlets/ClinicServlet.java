@@ -3,7 +3,6 @@ package org.petclinic.servlets;
 import org.petclinic.petclinicapp.Client;
 import org.petclinic.petclinicapp.Clinic;
 import org.petclinic.petclinicapp.Exceptions.IDException;
-import org.petclinic.petclinicapp.Exceptions.PetTypeException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +19,7 @@ public class ClinicServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=cp1251");
+        /*resp.setContentType("text/html; charset=cp1251");
         PrintWriter writer = resp.getWriter();
         writer.append(
                 "<!DOCTYPE html>" +
@@ -48,14 +47,14 @@ public class ClinicServlet extends HttpServlet {
                         "</body>" +
                         "</html>"
         );
-        writer.flush();
+        writer.flush();*/
     }
 
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=cp1251");
+    /*    resp.setContentType("text/html; charset=cp1251");
         try {
             if (!req.getParameter("id").isEmpty() || !req.getParameter("name").isEmpty() || !req.getParameter("type").isEmpty() || !req.getParameter("pet").isEmpty())
                 this.clinic.addClient(Integer.parseInt(req.getParameter("id")), req.getParameter("name"), req.getParameter("type"), req.getParameter("pet"));
@@ -87,7 +86,7 @@ public class ClinicServlet extends HttpServlet {
             }
             sb.append("</table>");
         }
-        return decode(sb.toString());
+        return decode(sb.toString());*/
     }
 
     public static String decode(String input) {

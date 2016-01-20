@@ -3,7 +3,6 @@ package org.petclinic.store;
 import org.petclinic.petclinicapp.Client;
 import org.petclinic.petclinicapp.Clinic;
 import org.petclinic.petclinicapp.Exceptions.IDException;
-import org.petclinic.petclinicapp.Exceptions.PetTypeException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
 
 import java.util.List;
@@ -19,16 +18,20 @@ public class ClinicCache {
         return INSTANCE;
     }
 
-    public void add(int id, String clientName, String petType, String petName) throws WrongInputException, IDException, PetTypeException {
-        CLINIC.addClient(id, clientName, petType, petName);
+    public void add(int id, String clientName) throws WrongInputException, IDException {
+        CLINIC.addClient(id, clientName);
+    }
+
+    public void addPet(int id, String petType, String petName) throws IDException {
+        CLINIC.addPetForClient(id, petType, petName);
     }
 
     public void editClientName(int id, String clientName) throws WrongInputException, IDException {
         CLINIC.changeClientName(id, clientName);
     }
 
-    public void editPetName(int id, String petName) throws WrongInputException, IDException {
-        CLINIC.changePetName(id, petName);
+    public void editPetName(int id, String currentPetName, String newPetName) throws WrongInputException, IDException {
+        CLINIC.changePetName(id, currentPetName, newPetName);
     }
 
     public List<Client> searchByPetName(String petName) throws WrongInputException {
@@ -45,6 +48,10 @@ public class ClinicCache {
 
     public void delClient(int id) throws IDException {
         CLINIC.removeClient(id);
+    }
+
+    public void delPet(int id, String petName) throws WrongInputException, IDException {
+        CLINIC.removePet(id, petName);
     }
 
     public List<Client> getClients() {

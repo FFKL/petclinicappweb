@@ -17,7 +17,7 @@ public class ClinicCRUDServletTest extends Mockito {
 
     final ClinicCache CLINIC_CACHE = ClinicCache.getInstance();
 
-    @Test
+    /*@Test
     public void testAddUser() throws Exception {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
@@ -172,5 +172,5 @@ public class ClinicCRUDServletTest extends Mockito {
         assertEquals(search.getSearchResult(), clients);
         CLINIC_CACHE.removeAll();
         assertTrue(CLINIC_CACHE.getClients().isEmpty());
-    }
+    }*/
 }

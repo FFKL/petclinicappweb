@@ -1,7 +1,6 @@
 package org.petclinic.servlets;
 
 import org.petclinic.petclinicapp.Exceptions.IDException;
-import org.petclinic.petclinicapp.Exceptions.PetTypeException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
 import org.petclinic.store.ClinicCache;
 
@@ -18,13 +17,16 @@ public class AddClientServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            this.CLINIC_CACHE.add(Integer.parseInt(req.getParameter("id")), req.getParameter("owner"), req.getParameter("type"), req.getParameter("pet"));
+            req.setCharacterEncoding("UTF-8");
+            int id = Integer.parseInt(req.getParameter("id"));
+            this.CLINIC_CACHE.add(id, req.getParameter("client name"));
+            if (!req.getParameter("pet name").isEmpty()) {
+                this.CLINIC_CACHE.addPet(id, req.getParameter("type"), req.getParameter("pet name"));
+            }
             resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/view"));
         } catch (WrongInputException e) {
             e.printStackTrace();
         } catch (IDException e) {
-            e.printStackTrace();
-        } catch (PetTypeException e) {
             e.printStackTrace();
         }
     }

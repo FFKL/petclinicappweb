@@ -17,18 +17,9 @@ public class EditClientServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!req.getParameter("owner").isEmpty()) {
+        if (!req.getParameter("client name").isEmpty()) {
             try {
-                this.CLINIC_CACHE.editClientName(currentId, req.getParameter("owner"));
-            } catch (WrongInputException e) {
-                e.printStackTrace();
-            } catch (IDException e) {
-                e.printStackTrace();
-            }
-        }
-        if (!req.getParameter("pet").isEmpty()) {
-            try {
-                this.CLINIC_CACHE.editPetName(currentId, req.getParameter("pet"));
+                this.CLINIC_CACHE.editClientName(currentId, req.getParameter("client name"));
             } catch (WrongInputException e) {
                 e.printStackTrace();
             } catch (IDException e) {
@@ -43,6 +34,7 @@ public class EditClientServlet extends HttpServlet {
         try {
             currentId = Integer.parseInt(req.getParameter("id"));
             req.setAttribute("client", this.CLINIC_CACHE.searchById(currentId));
+            req.setAttribute("pets", this.CLINIC_CACHE.searchById(currentId).getPets());
             RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/EditClient.jsp");
             dispatcher.forward(req, resp);
         } catch (IDException e) {

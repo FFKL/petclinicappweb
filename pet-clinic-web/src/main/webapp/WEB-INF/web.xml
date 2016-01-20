@@ -31,6 +31,16 @@
         <servlet-name>ClinicViewServlet</servlet-name>
         <url-pattern>/clinic/view</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PetsViewServlet</servlet-name>
+        <servlet-class>org.petclinic.servlets.PetsViewServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PetsViewServlet</servlet-name>
+        <url-pattern>/clinic/petsview</url-pattern>
+    </servlet-mapping>
     
     <servlet>
         <servlet-name>AddClientServlet</servlet-name>
@@ -40,6 +50,16 @@
     <servlet-mapping>
         <servlet-name>AddClientServlet</servlet-name>
         <url-pattern>/clinic/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddPetServlet</servlet-name>
+        <servlet-class>org.petclinic.servlets.AddPetServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddPetServlet</servlet-name>
+        <url-pattern>/clinic/addpet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -53,6 +73,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>DeletePetServlet</servlet-name>
+        <servlet-class>org.petclinic.servlets.DeletePetServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeletePetServlet</servlet-name>
+        <url-pattern>/clinic/delpet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>EditClientServlet</servlet-name>
         <servlet-class>org.petclinic.servlets.EditClientServlet</servlet-class>
     </servlet>
@@ -60,6 +90,16 @@
     <servlet-mapping>
         <servlet-name>EditClientServlet</servlet-name>
         <url-pattern>/clinic/edit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditPetServlet</servlet-name>
+        <servlet-class>org.petclinic.servlets.EditPetServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditPetServlet</servlet-name>
+        <url-pattern>/clinic/editpet</url-pattern>
     </servlet-mapping>
 
     <servlet>

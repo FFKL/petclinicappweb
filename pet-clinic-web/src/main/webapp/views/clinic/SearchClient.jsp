@@ -12,11 +12,11 @@
         <tr>
             <td align="right" >Owner name: </td>
             <td>
-                <input type="text" name="owner">
+                <input type="text" name="client name">
             </td>
             <td align="right" >Pet name: </td>
             <td>
-                <input type="text" name="pet">
+                <input type="text" name="pet name">
             </td>
             <td><input type="submit" align="center" value="Edit"/></td>
         </tr>
@@ -25,19 +25,18 @@
         <tr>
             <td>ID</td>
             <td>CLIENT_NAME</td>
-            <td>PET_VOICE</td>
-            <td>PET_NAME</td>
+            <td>PETS</td>
             <td>Actions</td>
         </tr>
         <c:forEach items="${result}" var="result" varStatus="status">
         <tr valign="top">
             <td>${result.getId()}</td>
             <td>${result.getClientName()}</td>
-            <td>${result.getPet().makeSound()}</td>
-            <td>${result.getPet().getName()}</td>
+            <td>${client.getPets().size()}</td>
             <td>
-                <a href="${pageContext.servletContext.contextPath}/clinic/edit?id=${result.getId()}">Edit</a>
-                <a href="${pageContext.servletContext.contextPath}/clinic/delete?id=${result.getId()}">Delete</a>
+                <a href="${pageContext.servletContext.contextPath}/clinic/addpet?id=${client.getId()}">Add pet</a>
+                <a href="${pageContext.servletContext.contextPath}/clinic/edit?id=${client.getId()}">Edit</a>
+                <a href="${pageContext.servletContext.contextPath}/clinic/delete?id=${client.getId()}">Delete</a>
             </td>
         </tr>
         </c:forEach>

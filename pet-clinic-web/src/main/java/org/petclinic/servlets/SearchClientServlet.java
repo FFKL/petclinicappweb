@@ -21,18 +21,19 @@ public class SearchClientServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!req.getParameter("owner").isEmpty()) {
+        req.setCharacterEncoding("UTF-8");
+        if (!req.getParameter("client name").isEmpty()) {
             try {
-                searchResult = this.CLINIC_CACHE.searchByClientName(req.getParameter("owner"));
+                searchResult = this.CLINIC_CACHE.searchByClientName(req.getParameter("client name"));
             } catch (WrongInputException e) {
                 e.printStackTrace();
             }
-        } else if (!req.getParameter("pet").isEmpty() && !searchResult.isEmpty()){
+        } else if (!req.getParameter("pet name").isEmpty() && !searchResult.isEmpty()){
             searchResult.clear();
         }
-        if (!req.getParameter("pet").isEmpty()) {
+        if (!req.getParameter("pet name").isEmpty()) {
             try {
-                List<Client> petSearchList = this.CLINIC_CACHE.searchByPetName(req.getParameter("pet"));
+                List<Client> petSearchList = this.CLINIC_CACHE.searchByPetName(req.getParameter("pet name"));
                 if (searchResult.isEmpty()) {
                     searchResult = petSearchList;
                 }

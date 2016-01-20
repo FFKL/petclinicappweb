@@ -17,17 +17,18 @@
             </td>
             <td align="right" >Owner name: </td>
             <td>
-                <input type="text" name="owner">
+                <input type="text" name="client name">
             </td>
             <td align="right" >Pet name: </td>
             <td>
-                <input type="text" name="pet">
+                <input type="text" name="pet name">
             </td>
             <td align="right" >Pet type: </td>
             <td>
                 <select name="type">
                     <option value="Cat">Cat</option>
                     <option value="Dog">Dog</option>
+                    <option value="Default">DefaultPet</option>
                 </select>
             </td>
             <td><input type="submit" align="center" value="Submit"/></td>

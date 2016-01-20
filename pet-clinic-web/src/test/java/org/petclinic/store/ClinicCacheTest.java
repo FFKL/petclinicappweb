@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class ClinicCacheTest {
 
-    @Test
+    /*@Test
     public void testGetInstance() throws Exception {
         ClinicCache instance = ClinicCache.getInstance();
 
@@ -155,5 +155,5 @@ public class ClinicCacheTest {
         instance.add(2, "Fedor", "Dog", "Sharik");
         instance.removeAll();
         assertTrue(instance.isEmpty());
-    }
+    }*/
 }
