@@ -22,7 +22,7 @@ public class ClinicCache {
         CLINIC.addClient(id, clientName);
     }
 
-    public void addPet(int id, String petType, String petName) throws IDException {
+    public void addPet(int id, String petType, String petName) throws IDException, WrongInputException {
         CLINIC.addPetForClient(id, petType, petName);
     }
 

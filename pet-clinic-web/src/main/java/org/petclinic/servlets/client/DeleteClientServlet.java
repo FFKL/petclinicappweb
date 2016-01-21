@@ -1,4 +1,4 @@
-package org.petclinic.servlets;
+package org.petclinic.servlets.client;
 
 import org.petclinic.petclinicapp.Exceptions.IDException;
 import org.petclinic.store.ClinicCache;

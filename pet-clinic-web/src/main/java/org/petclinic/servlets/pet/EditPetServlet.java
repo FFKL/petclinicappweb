@@ -1,7 +1,8 @@
-package org.petclinic.servlets;
+package org.petclinic.servlets.pet;
 
 import org.petclinic.petclinicapp.Exceptions.IDException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
+import org.petclinic.servlets.client.ClientViewServlet;
 import org.petclinic.store.ClinicCache;
 
 import javax.servlet.RequestDispatcher;
@@ -17,6 +18,7 @@ public class EditPetServlet extends HttpServlet {
     int clientId;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        clientId = ClientViewServlet.getId();
         if (!req.getParameter("pet name").isEmpty()) {
             try {
                 this.CLINIC_CACHE.editPetName(clientId, petName, req.getParameter("pet name"));
@@ -26,13 +28,13 @@ public class EditPetServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        resp.sendRedirect(String.format("%s%s%s", req.getContextPath(), "/clinic/edit?id=", clientId));
+        resp.sendRedirect(String.format("%s%s%s", req.getContextPath(), "/clinic/client?id=", clientId));
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         petName = req.getParameter("name");
-        clientId = Integer.parseInt(req.getParameter("clientid"));
+        clientId = Integer.parseInt(req.getParameter("id"));
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/EditPet.jsp");
         dispatcher.forward(req, resp);
     }

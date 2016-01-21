@@ -1,6 +1,7 @@
-package org.petclinic.servlets;
+package org.petclinic.servlets.pet;
 
 import org.petclinic.petclinicapp.Exceptions.IDException;
+import org.petclinic.petclinicapp.Exceptions.WrongInputException;
 import org.petclinic.store.ClinicCache;
 
 import javax.servlet.RequestDispatcher;
@@ -10,18 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class PetsViewServlet extends HttpServlet {
+public class DeletePetServlet extends HttpServlet {
     private final ClinicCache CLINIC_CACHE = ClinicCache.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            req.setAttribute("pets", this.CLINIC_CACHE.searchById(Integer.parseInt(req.getParameter("id"))).getPets());
-            req.setAttribute("id", req.getParameter("id"));
+            this.CLINIC_CACHE.delPet(Integer.parseInt(req.getParameter("id")), req.getParameter("name"));
+        } catch (WrongInputException e) {
+            e.printStackTrace();
         } catch (IDException e) {
             e.printStackTrace();
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/PetsView.jsp");
-        dispatcher.forward(req, resp);
+        resp.sendRedirect(String.format("%s%s%s", req.getContextPath(), "/clinic/client?id=", req.getParameter("id")));
     }
 }

@@ -12,16 +12,6 @@
         based on the recommendations of the Applications Developer's Guide
     </description>
 
-	<servlet>
-        <servlet-name>ClinicServlet</servlet-name>
-        <servlet-class>org.petclinic.servlets.ClinicServlet</servlet-class>
-	</servlet>
-
-    <servlet-mapping>
-        <servlet-name>ClinicServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
-    </servlet-mapping>
-
     <servlet>
         <servlet-name>ClinicViewServlet</servlet-name>
         <servlet-class>org.petclinic.servlets.ClinicViewServlet</servlet-class>
@@ -33,18 +23,18 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>PetsViewServlet</servlet-name>
-        <servlet-class>org.petclinic.servlets.PetsViewServlet</servlet-class>
+        <servlet-name>ClientViewServlet</servlet-name>
+        <servlet-class>org.petclinic.servlets.client.ClientViewServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>PetsViewServlet</servlet-name>
-        <url-pattern>/clinic/petsview</url-pattern>
+        <servlet-name>ClientViewServlet</servlet-name>
+        <url-pattern>/clinic/client</url-pattern>
     </servlet-mapping>
     
     <servlet>
         <servlet-name>AddClientServlet</servlet-name>
-        <servlet-class>org.petclinic.servlets.AddClientServlet</servlet-class>
+        <servlet-class>org.petclinic.servlets.client.AddClientServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -54,7 +44,7 @@
 
     <servlet>
         <servlet-name>AddPetServlet</servlet-name>
-        <servlet-class>org.petclinic.servlets.AddPetServlet</servlet-class>
+        <servlet-class>org.petclinic.servlets.pet.AddPetServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -64,7 +54,7 @@
 
     <servlet>
         <servlet-name>DeleteClientServlet</servlet-name>
-        <servlet-class>org.petclinic.servlets.DeleteClientServlet</servlet-class>
+        <servlet-class>org.petclinic.servlets.client.DeleteClientServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -74,7 +64,7 @@
 
     <servlet>
         <servlet-name>DeletePetServlet</servlet-name>
-        <servlet-class>org.petclinic.servlets.DeletePetServlet</servlet-class>
+        <servlet-class>org.petclinic.servlets.pet.DeletePetServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -84,7 +74,7 @@
 
     <servlet>
         <servlet-name>EditClientServlet</servlet-name>
-        <servlet-class>org.petclinic.servlets.EditClientServlet</servlet-class>
+        <servlet-class>org.petclinic.servlets.client.EditClientServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -94,7 +84,7 @@
 
     <servlet>
         <servlet-name>EditPetServlet</servlet-name>
-        <servlet-class>org.petclinic.servlets.EditPetServlet</servlet-class>
+        <servlet-class>org.petclinic.servlets.pet.EditPetServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -104,7 +94,7 @@
 
     <servlet>
         <servlet-name>SearchClientServlet</servlet-name>
-        <servlet-class>org.petclinic.servlets.SearchClientServlet</servlet-class>
+        <servlet-class>org.petclinic.servlets.client.SearchClientServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

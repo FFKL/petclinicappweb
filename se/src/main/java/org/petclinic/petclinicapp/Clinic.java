@@ -37,6 +37,11 @@ public class Clinic {
      * @throws IDException, если существует клиент с введенным ID
      */
     public void addClient(final int id, String clientName) throws WrongInputException, IDException {
+        for (Client c : this.clients) {
+            if (id == c.getId())
+                throw new IDException(ID_EXCEPTION_MESSAGE);
+        }
+        checkCorrectInput(clientName);
         clients.add(new Client(id, clientName));
 
         /*Pet pet = null;
@@ -59,8 +64,10 @@ public class Clinic {
         }*/
     }
 
-    public void addPetForClient(int id, String petType, String petName) throws IDException {
+    public void addPetForClient(int id, String petType, String petName) throws IDException, WrongInputException {
         Client client = this.findById(id);
+        checkCorrectInput(petType);
+        checkCorrectInput(petName);
         client.addPet(petType, petName);
     }
 

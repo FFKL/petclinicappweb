@@ -18,12 +18,10 @@
     </tr>
     <c:forEach items="${clients}" var="client" varStatus="status">
         <tr valign="top">
-            <td>${client.getId()}</td>
+            <td><a href="${pageContext.servletContext.contextPath}/clinic/client?id=${client.getId()}">${client.getId()}</a></td>
             <td>${client.getClientName()}</td>
-            <td><a href="${pageContext.servletContext.contextPath}/clinic/petsview?id=${client.getId()}">${client.getPets().size()}</a></td>
+            <td>${client.getPets().size()}</td>
             <td>
-                <a href="${pageContext.servletContext.contextPath}/clinic/addpet?id=${client.getId()}">Add pet</a>
-                <a href="${pageContext.servletContext.contextPath}/clinic/edit?id=${client.getId()}">Edit</a>
                 <a href="${pageContext.servletContext.contextPath}/clinic/delete?id=${client.getId()}">Delete</a>
             </td>
         </tr>
