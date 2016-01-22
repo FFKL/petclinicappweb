@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class ClinicCacheTest {
 
-    /*@Test
+    @Test
     public void testGetInstance() throws Exception {
         ClinicCache instance = ClinicCache.getInstance();
 
@@ -26,11 +26,15 @@ public class ClinicCacheTest {
         ClinicCache instance = ClinicCache.getInstance();
 
         Clinic clinic = new Clinic();
-        clinic.addClient(1, "Fedor", "Cat", "Pushok");
-        clinic.addClient(2, "Grigoriy", "Dog", "Sharik");
+        clinic.addClient(1, "Fedor");
+        clinic.addPetForClient(1, "Cat", "Pushok");
+        clinic.addClient(2, "Grigoriy");
+        clinic.addPetForClient(2, "Dog", "Sharik");
 
-        instance.add(1, "Fedor", "Cat", "Pushok");
-        instance.add(2, "Grigoriy", "Dog", "Sharik");
+        instance.add(1, "Fedor");
+        instance.addPet(1, "Cat", "Pushok");
+        instance.add(2, "Grigoriy");
+        instance.addPet(2, "Dog", "Sharik");
 
         assertEquals(clinic.getClients(), instance.getClients());
         instance.removeAll();
@@ -41,17 +45,19 @@ public class ClinicCacheTest {
         ClinicCache instance = ClinicCache.getInstance();
 
         Clinic clinic = new Clinic();
-        clinic.addClient(1, "Fedor", "Cat", "Pushok");
-        clinic.changeClientName(1, "X");
+        clinic.addClient(1, "Fedor");
+        clinic.addPetForClient(1, "Cat", "Pushok");
+        clinic.changeClientName(1, "Ivan");
 
-        instance.add(1, "Fedor", "Cat", "Pushok");
-        instance.editClientName(1, "X");
+        instance.add(1, "Fedor");
+        instance.addPet(1, "Cat", "Pushok");
+        instance.editClientName(1, "Ivan");
 
         assertEquals(clinic.getClients().get(0), instance.getClients().get(0));
         instance.removeAll();
     }
 
-    @Test
+    /*@Test
     public void testEditPetName() throws Exception {
         ClinicCache instance = ClinicCache.getInstance();
 

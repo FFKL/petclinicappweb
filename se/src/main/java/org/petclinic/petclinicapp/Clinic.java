@@ -16,13 +16,13 @@ public class Clinic {
     /**
      * Регулярное выражение
      */
-    final String CONTAINS_NO_NUMBERS_REGEXP = "\\D+";
+    private final String NAME_REGEXP = "^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$";
     /**
      * Константы для сообщений в исключениях
      */
-    final String ID_EXCEPTION_MESSAGE =  "Введенный ID существует. Введите другой.";
-    final String ID_EXCEPTION_MESSAGE_SEARCH = "Клиента с введенным ID не существует";
-    final String WRONG_INPUT_EXCEPTION_MESSAGE = "Ввод имени содержит цифры. Введите корректное имя (Пример: Василий)";
+    private final String ID_EXCEPTION_MESSAGE =  "Введенный ID существует. Введите другой.";
+    private final String ID_EXCEPTION_MESSAGE_SEARCH = "Клиента с введенным ID не существует";
+    private final String WRONG_INPUT_EXCEPTION_MESSAGE = "Ввод имени некорректен. Введите другое имя (Пример: Василий)";
     /**
      * Конструктор
      */
@@ -43,25 +43,6 @@ public class Clinic {
         }
         checkCorrectInput(clientName);
         clients.add(new Client(id, clientName));
-
-        /*Pet pet = null;
-        for (Client c : this.clients) {
-            if (id == c.getId())
-                throw new IDException(ID_EXCEPTION_MESSAGE);
-        }
-        if (!clientName.matches(CONTAINS_NO_NUMBERS_REGEXP) || !petName.matches(CONTAINS_NO_NUMBERS_REGEXP)) {
-            throw new WrongInputException(WRONG_INPUT_EXCEPTION_MESSAGE);
-        }
-        else if (!petType.equals("Cat") && !petType.equals("Dog")) {
-            throw new PetTypeException(PET_TYPE_EXCEPTION_MESSAGE);
-        }
-        else {
-            if (petType.equals("Dog"))
-                pet = new Dog(petName);
-            else if (petType.equals("Cat"))
-                pet = new Cat(petName);
-            this.clients.add(new Client(id, clientName, pet));
-        }*/
     }
 
     public void addPetForClient(int id, String petType, String petName) throws IDException, WrongInputException {
@@ -209,7 +190,7 @@ public class Clinic {
     }
 
     private void checkCorrectInput(String name) throws WrongInputException {
-        if (!name.matches(CONTAINS_NO_NUMBERS_REGEXP)) {
+        if (!name.matches(NAME_REGEXP)) {
             throw new WrongInputException(WRONG_INPUT_EXCEPTION_MESSAGE);
         }
     }

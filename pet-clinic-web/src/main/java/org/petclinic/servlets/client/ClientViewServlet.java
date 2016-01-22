@@ -22,7 +22,7 @@ public class ClientViewServlet extends HttpServlet {
             req.setAttribute("pets", this.CLINIC_CACHE.searchById(Integer.parseInt(req.getParameter("id"))).getPets());
             req.setAttribute("client", this.CLINIC_CACHE.searchById(Integer.parseInt(req.getParameter("id"))));
         } catch (IDException e) {
-            e.printStackTrace();
+            //nothing
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/ClientView.jsp");
         dispatcher.forward(req, resp);

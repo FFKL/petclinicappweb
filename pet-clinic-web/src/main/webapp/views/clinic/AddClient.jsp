@@ -34,6 +34,7 @@
             <td><input type="submit" align="center" value="Submit"/></td>
         </tr>
     </table>
+    <b>${message}</b>
 </form>
 </body>
 </html>
