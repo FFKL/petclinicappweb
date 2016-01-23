@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class DeleteClientServlet extends HttpServlet {
-
+    private final String FORMAT_PATTERN = "%s%s";
+    private final String REDIRECT_PATH = "/clinic/view";
     private final ClinicCache CLINIC_CACHE = ClinicCache.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             this.CLINIC_CACHE.delClient(Integer.parseInt(req.getParameter("id")));
-            resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/view"));
+            resp.sendRedirect(String.format(FORMAT_PATTERN, req.getContextPath(), REDIRECT_PATH));
         } catch (IDException e) {
             e.printStackTrace();
         }

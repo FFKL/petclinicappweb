@@ -13,10 +13,16 @@ public class ClinicViewServlet extends HttpServlet {
 
     private final ClinicCache CLINIC_CACHE = ClinicCache.getInstance();
 
+    private final String JSP_FILE_PATH = "/views/clinic/ClinicView.jsp";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("clients", this.CLINIC_CACHE.getClients());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/ClinicView.jsp");
+        forwardTo(req, resp);
+    }
+
+    private void forwardTo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher dispatcher = req.getRequestDispatcher(JSP_FILE_PATH);
         dispatcher.forward(req, resp);
     }
 }

@@ -14,46 +14,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchClientServlet extends HttpServlet {
-
+    private final String JSP_FILE_PATH = "/views/clinic/SearchClient.jsp";
+    private final String REDIRECT_PATH = "/clinic/search";
+    private final String FORMAT_PATTERN = "%s%s";
     private final ClinicCache CLINIC_CACHE = ClinicCache.getInstance();
 
     private List<Client> searchResult = new ArrayList<Client>();
+    private String clientName;
+    private String petName;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        if (!req.getParameter("client name").isEmpty()) {
-            try {
-                searchResult = this.CLINIC_CACHE.searchByClientName(req.getParameter("client name"));
-            } catch (WrongInputException e) {
-                e.printStackTrace();
-            }
-        } else if (!req.getParameter("pet name").isEmpty() && !searchResult.isEmpty()){
+        clientName = req.getParameter("client name");
+        petName = req.getParameter("pet name");
+        if (!clientName.isEmpty()) {
+            searchByClientName();
+        } else if (!petName.isEmpty() && !searchResult.isEmpty()){
             searchResult.clear();
         }
-        if (!req.getParameter("pet name").isEmpty()) {
-            try {
-                List<Client> petSearchList = this.CLINIC_CACHE.searchByPetName(req.getParameter("pet name"));
-                if (searchResult.isEmpty()) {
-                    searchResult = petSearchList;
-                }
-                else
-                    searchResult.addAll(petSearchList);
-            } catch (WrongInputException e) {
-                e.printStackTrace();
-            }
+        if (!petName.isEmpty()) {
+            searchByPetName();
         }
-        resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/search"));
+        resp.sendRedirect(String.format(FORMAT_PATTERN, req.getContextPath(), REDIRECT_PATH));
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("result", searchResult);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/SearchClient.jsp");
-        dispatcher.forward(req, resp);
+        forwardTo(req, resp);
     }
 
     public List<Client> getSearchResult() {
         return searchResult;
+    }
+
+    private void forwardTo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher dispatcher = req.getRequestDispatcher(JSP_FILE_PATH);
+        dispatcher.forward(req, resp);
+    }
+
+    private void searchByClientName() {
+        try {
+            searchResult = this.CLINIC_CACHE.searchByClientName(clientName);
+        } catch (WrongInputException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void searchByPetName() {
+        try {
+            List<Client> petSearchList = this.CLINIC_CACHE.searchByPetName(petName);
+            if (searchResult.isEmpty()) {
+                searchResult = petSearchList;
+            }
+            else
+                searchResult.addAll(petSearchList);
+        } catch (WrongInputException e) {
+            e.printStackTrace();
+        }
     }
 }

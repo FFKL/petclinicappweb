@@ -13,22 +13,27 @@ import java.io.IOException;
 public class ClientViewServlet extends HttpServlet {
 
     private final ClinicCache CLINIC_CACHE = ClinicCache.getInstance();
+    private final String JSP_FILE_PATH = "/views/clinic/ClientView.jsp";
     private static int id;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             id = Integer.parseInt(req.getParameter("id"));
-            req.setAttribute("pets", this.CLINIC_CACHE.searchById(Integer.parseInt(req.getParameter("id"))).getPets());
-            req.setAttribute("client", this.CLINIC_CACHE.searchById(Integer.parseInt(req.getParameter("id"))));
+            req.setAttribute("pets", this.CLINIC_CACHE.searchById(id).getPets());
+            req.setAttribute("client", this.CLINIC_CACHE.searchById(id));
         } catch (IDException e) {
             //nothing
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/ClientView.jsp");
-        dispatcher.forward(req, resp);
+        forwardTo(req, resp);
     }
 
     public static int getId() {
         return id;
+    }
+
+    private void forwardTo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher dispatcher = req.getRequestDispatcher(JSP_FILE_PATH);
+        dispatcher.forward(req, resp);
     }
 }
