@@ -52,4 +52,8 @@ public class SearchClientServlet extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/SearchClient.jsp");
         dispatcher.forward(req, resp);
     }
+
+    public List<Client> getSearchResult() {
+        return searchResult;
+    }
 }

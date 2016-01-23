@@ -13,7 +13,7 @@ import java.io.IOException;
 public class ClientViewServlet extends HttpServlet {
 
     private final ClinicCache CLINIC_CACHE = ClinicCache.getInstance();
-    static int id;
+    private static int id;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

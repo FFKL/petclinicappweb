@@ -3,8 +3,6 @@ package org.petclinic.store;
 import org.junit.Test;
 import org.petclinic.petclinicapp.Client;
 import org.petclinic.petclinicapp.Clinic;
-import org.petclinic.petclinicapp.Pets.Cat;
-import org.petclinic.petclinicapp.Pets.Dog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,16 +55,18 @@ public class ClinicCacheTest {
         instance.removeAll();
     }
 
-    /*@Test
+    @Test
     public void testEditPetName() throws Exception {
         ClinicCache instance = ClinicCache.getInstance();
 
         Clinic clinic = new Clinic();
-        clinic.addClient(1, "Fedor", "Cat", "Pushok");
-        clinic.changePetName(1, "X");
+        clinic.addClient(1, "Fedor");
+        clinic.addPetForClient(1, "Cat", "Pushok");
+        clinic.changePetName(1, "Pushok", "Snezhok");
 
-        instance.add(1, "Fedor", "Cat", "Pushok");
-        instance.editPetName(1, "X");
+        instance.add(1, "Fedor");
+        instance.addPet(1, "Cat", "Pushok");
+        instance.editPetName(1, "Pushok", "Snezhok");
 
         assertEquals(clinic.getClients().get(0), instance.getClients().get(0));
         instance.removeAll();
@@ -77,12 +77,16 @@ public class ClinicCacheTest {
         ClinicCache instance = ClinicCache.getInstance();
 
         Clinic clinic = new Clinic();
-        clinic.addClient(1, "Fedor", "Cat", "Pushok");
-        clinic.addClient(2, "Grigoriy", "Dog", "Sharik");
+        clinic.addClient(1, "Fedor");
+        clinic.addPetForClient(1, "Cat", "Pushok");
+        clinic.addClient(2, "Grigoriy");
+        clinic.addPetForClient(2, "Dog", "Sharik");
         List<Client> clients = clinic.findClientsByPetName("Pushok");
 
-        instance.add(1, "Fedor", "Cat", "Pushok");
-        instance.add(2, "Grigoriy", "Cat", "Sharik");
+        instance.add(1, "Fedor");
+        instance.addPet(1, "Cat", "Pushok");
+        instance.add(2, "Grigoriy");
+        instance.addPet(2, "Cat", "Sharik");
         List<Client> instClients = instance.searchByPetName("Pushok");
 
         assertEquals(clients, instClients);
@@ -94,12 +98,16 @@ public class ClinicCacheTest {
         ClinicCache instance = ClinicCache.getInstance();
 
         Clinic clinic = new Clinic();
-        clinic.addClient(1, "Fedor", "Cat", "Pushok");
-        clinic.addClient(2, "Fedor", "Dog", "Sharik");
+        clinic.addClient(1, "Fedor");
+        clinic.addPetForClient(1, "Cat", "Pushok");
+        clinic.addClient(2, "Fedor");
+        clinic.addPetForClient(2, "Dog", "Sharik");
         List<Client> clients = clinic.findByClientName("Fedor");
 
-        instance.add(1, "Fedor", "Cat", "Pushok");
-        instance.add(2, "Fedor", "Dog", "Sharik");
+        instance.add(1, "Fedor");
+        instance.addPet(1, "Cat", "Pushok");
+        instance.add(2, "Fedor");
+        instance.addPet(2, "Dog", "Sharik");
         List<Client> instClients = instance.searchByClientName("Fedor");
 
         assertEquals(clients, instClients);
@@ -111,12 +119,16 @@ public class ClinicCacheTest {
         ClinicCache instance = ClinicCache.getInstance();
 
         Clinic clinic = new Clinic();
-        clinic.addClient(1, "Fedor", "Cat", "Pushok");
-        clinic.addClient(2, "Fedor", "Dog", "Sharik");
+        clinic.addClient(1, "Fedor");
+        clinic.addPetForClient(1, "Cat", "Pushok");
+        clinic.addClient(2, "Fedor");
+        clinic.addPetForClient(2, "Dog", "Sharik");
         Client client = clinic.findById(2);
 
-        instance.add(1, "Fedor", "Cat", "Pushok");
-        instance.add(2, "Fedor", "Dog", "Sharik");
+        instance.add(1, "Fedor");
+        instance.addPet(1, "Cat", "Pushok");
+        instance.add(2, "Fedor");
+        instance.addPet(2, "Dog", "Sharik");
         Client instClient = instance.searchById(2);
 
         assertEquals(client, instClient);
@@ -128,11 +140,15 @@ public class ClinicCacheTest {
         ClinicCache instance = ClinicCache.getInstance();
 
         Clinic clinic = new Clinic();
-        clinic.addClient(1, "Fedor", "Cat", "Pushok");
-        clinic.addClient(2, "Fedor", "Dog", "Sharik");
+        clinic.addClient(1, "Fedor");
+        clinic.addPetForClient(1, "Cat", "Pushok");
+        clinic.addClient(2, "Fedor");
+        clinic.addPetForClient(2, "Dog", "Sharik");
 
-        instance.add(1, "Fedor", "Cat", "Pushok");
-        instance.add(2, "Fedor", "Dog", "Sharik");
+        instance.add(1, "Fedor");
+        instance.addPet(1, "Cat", "Pushok");
+        instance.add(2, "Fedor");
+        instance.addPet(2, "Dog", "Sharik");
 
         clinic.removeClient(1);
         instance.delClient(1);
@@ -144,11 +160,15 @@ public class ClinicCacheTest {
     public void testGetClients() throws Exception {
         ClinicCache instance = ClinicCache.getInstance();
         List<Client> clients = new ArrayList<Client>();
-        clients.add(new Client(1, "Fedor", new Cat("Pushok")));
-        clients.add(new Client(2, "Fedor", new Dog("Sharik")));
+        clients.add(new Client(1, "Fedor"));
+        clients.get(0).addPet("Cat", "Pushok");
+        clients.add(new Client(2, "Fedor"));
+        clients.get(1).addPet("Dog", "Sharik");
 
-        instance.add(1, "Fedor", "Cat", "Pushok");
-        instance.add(2, "Fedor", "Dog", "Sharik");
+        instance.add(1, "Fedor");
+        instance.addPet(1, "Cat", "Pushok");
+        instance.add(2, "Fedor");
+        instance.addPet(2, "Dog", "Sharik");
 
         assertEquals(clients, instance.getClients());
         instance.removeAll();
@@ -157,9 +177,22 @@ public class ClinicCacheTest {
     @Test
     public void testRemoveAll() throws Exception {
         ClinicCache instance = ClinicCache.getInstance();
-        instance.add(1, "Fedor", "Cat", "Pushok");
-        instance.add(2, "Fedor", "Dog", "Sharik");
+        instance.add(1, "Fedor");
+        instance.addPet(1, "Cat", "Pushok");
+        instance.add(2, "Fedor");
+        instance.addPet(2, "Dog", "Sharik");
         instance.removeAll();
         assertTrue(instance.isEmpty());
-    }*/
+    }
+
+    @Test
+    public void testRemovePet() throws Exception {
+        ClinicCache instance = ClinicCache.getInstance();
+        instance.add(1, "Fedor");
+        instance.addPet(1, "Cat", "Pushok");
+        assertFalse(instance.searchById(1).getPets().isEmpty());
+        instance.delPet(1, "Pushok");
+        assertTrue(instance.searchById(1).getPets().isEmpty());
+        instance.removeAll();
+    }
 }

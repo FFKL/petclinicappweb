@@ -18,7 +18,6 @@ public class EditPetServlet extends HttpServlet {
     int clientId;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        clientId = ClientViewServlet.getId();
         if (!req.getParameter("pet name").isEmpty()) {
             try {
                 this.CLINIC_CACHE.editPetName(clientId, petName, req.getParameter("pet name"));
@@ -33,8 +32,8 @@ public class EditPetServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        petName = req.getParameter("name");
         clientId = Integer.parseInt(req.getParameter("id"));
+        petName = req.getParameter("name");
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/clinic/EditPet.jsp");
         dispatcher.forward(req, resp);
     }
