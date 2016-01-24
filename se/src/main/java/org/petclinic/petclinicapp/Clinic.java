@@ -4,6 +4,7 @@ import org.petclinic.petclinicapp.Exceptions.IDException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
 import org.petclinic.petclinicapp.Pets.Pet;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,8 +191,13 @@ public class Clinic {
     }
 
     private void checkCorrectInput(String name) throws WrongInputException {
-        if (!name.matches(NAME_REGEXP)) {
-            throw new WrongInputException(WRONG_INPUT_EXCEPTION_MESSAGE);
+        try {
+            name = new String(name.getBytes("UTF-8"),"UTF-8");
+            if (!name.matches(NAME_REGEXP)) {
+                throw new WrongInputException(WRONG_INPUT_EXCEPTION_MESSAGE);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 }
