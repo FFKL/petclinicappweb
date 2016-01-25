@@ -20,6 +20,7 @@ public class AddPetServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String petName = req.getParameter("pet name");
         String petType = req.getParameter("type");
         clientId = ClientViewServlet.getId();

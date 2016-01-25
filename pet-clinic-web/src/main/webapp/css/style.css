@@ -1,0 +1,43 @@
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+#header {
+    background: #ecdfff;
+}
+.segment {
+    padding: 20px;
+    background: gainsboro;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-image: url(../images/background.jpg);
+}
+
+.logo a {
+    display: inline-block;
+    padding: 20px 0 0 0;
+    height: 40px;
+    width: 160px;
+    background-image: url(../images/label.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.logo span {
+    font: 16px "Arial";
+    margin: 0 200px;
+    color: black;
+    text-align: center;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+    padding: 2px 5px 2px 5px;
+}
