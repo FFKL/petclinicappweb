@@ -20,6 +20,7 @@ public class EditPetServlet extends HttpServlet {
     int clientId;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String newPetName = req.getParameter("pet name");
         if (!newPetName.isEmpty()) {
             try {
@@ -30,7 +31,7 @@ public class EditPetServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        resp.sendRedirect(String.format(REDIRECT_PATH, req.getContextPath(), FORMAT_PATTERN, clientId));
+        resp.sendRedirect(String.format(FORMAT_PATTERN, req.getContextPath(), REDIRECT_PATH, clientId));
     }
 
     @Override

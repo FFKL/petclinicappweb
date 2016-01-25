@@ -17,6 +17,7 @@ public class EditClientServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         int currentId = ClientViewServlet.getId();
         String clientName = req.getParameter("client name");
         if (!clientName.isEmpty()) {

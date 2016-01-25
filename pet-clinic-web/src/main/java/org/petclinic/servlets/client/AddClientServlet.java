@@ -51,6 +51,11 @@ public class AddClientServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        forwardTo(req, resp);
+    }
+
     private void wrongInputExceptionTreatment(HttpServletRequest req) {
         if (clientName.isEmpty()) {
             req.setAttribute("message", LACK_CLIENT_NAME_MESSAGE);
