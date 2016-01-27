@@ -4,6 +4,31 @@
     <head>
         <title>Добавление клиента</title>
         <link rel="stylesheet" href="../css/style.css">
+        <script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript">
+            function addClient() {
+                if (validate()) {
+                    $('#id').css('background-color', '');
+                    $('#clientName').css('background-color', '');
+
+                } else {
+                    alert("Заполните поля!");
+                }
+            }
+
+            function validate() {
+                var result = true;
+                if ($('#id').val() == '') {
+                    $('#id').css('background-color', 'rgba(255, 0, 45, 0.55)');
+                    result = false;
+                }
+                if ($('#clientName').val() == '') {
+                    $('#clientName').css('background-color', 'rgba(255, 0, 45, 0.55)');
+                    result = false;
+                }
+                return result;
+            }
+        </script>
     </head>
     <body>
         <div id="header">
@@ -19,9 +44,9 @@
                 <form action="${pageContext.servletContext.contextPath}/clinic/create" method="POST">
                     <div class="element-block">
                         <div class="element">ID: </div>
-                        <div class="element"><input type="text" name="id"></div>
+                        <div class="element"><input type="text" name="id" id="id"></div>
                         <div class="element">Имя клиента: </div>
-                        <div class="element"><input type="text" name="client name"></div>
+                        <div class="element"><input type="text" name="client name" id="clientName"></div>
                     </div>
                     <div class="element-block">
                         <div class="element">Имя питомца: </div>
@@ -35,7 +60,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="element"><input type="submit" align="center" value="Добавить"/></div>
+
+                    <div class="element"><input type="submit" align="center" value="Добавить" onclick="return addClient()"/></div>
                     <div class="message">${message}</div>
                 </form>
             </div>

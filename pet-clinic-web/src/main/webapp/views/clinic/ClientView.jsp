@@ -4,6 +4,42 @@
     <head>
         <title>Клиент</title>
         <link rel="stylesheet" href="../css/style.css">
+        <script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript">
+            function editClientName() {
+                if (validateClient()) {
+                    $('#clientName').css('background-color', '');
+
+                } else {
+                    alert("Заполните поля!");
+                }
+            }
+            function addPet() {
+                if (validatePet()) {
+                    $('#petName').css('background-color', '');
+
+                } else {
+                    alert("Заполните поля!");
+                }
+            }
+
+            function validateClient() {
+                var result = true;
+                if ($('#clientName').val() == '') {
+                    $('#clientName').css('background-color', 'rgba(255, 0, 45, 0.55)');
+                    result = false;
+                }
+                return result;
+            }
+            function validatePet() {
+                var result = true;
+                if ($('#petName').val() == '') {
+                    $('#petName').css('background-color', 'rgba(255, 0, 45, 0.55)');
+                    result = false;
+                }
+                return result;
+            }
+        </script>
     </head>
     <body>
         <div id="header">
@@ -18,15 +54,15 @@
             <div class="segment">
             <span>Изменение имени клиента</span>
                 <form action="${pageContext.servletContext.contextPath}/clinic/edit" method="POST">
-                    <div class="element"><input type="text" name="client name" placeholder="Введите имя клиента"></div>
-                    <div class="element"><input type="submit" align="center" value="Изменить"/></div>
+                    <div class="element"><input type="text" name="client name" id="clientName" placeholder="Введите имя клиента"></div>
+                    <div class="element"><input type="submit" align="center" value="Изменить" onclick="return editClientName()"/></div>
                 </form>
                 <input type="button" value="Удалить клиента" onClick='location.href="${pageContext.servletContext.contextPath}/clinic/delete?id=${client.getId()}"'>
             </div>
             <div class="segment">
                 <span>Добавление питомца</span>
                 <form action="${pageContext.servletContext.contextPath}/clinic/addpet" method="POST">
-                    <div class="element"><input type="text" name="pet name" placeholder="Введите имя питомца"></div>
+                    <div class="element"><input type="text" name="pet name" id="petName" placeholder="Введите имя питомца"></div>
                     <div class="element">
                         <select name="type">
                             <option value="Cat">Cat</option>
@@ -34,7 +70,7 @@
                             <option value="Default">DefaultPet</option>
                         </select>
                     </div>
-                    <div class="element"><input type="submit" align="center" value="Добавить"/></div>
+                    <div class="element"><input type="submit" align="center" value="Добавить" onclick="return addPet()"/></div>
                 </form>
             </div>
             <div class="segment">
