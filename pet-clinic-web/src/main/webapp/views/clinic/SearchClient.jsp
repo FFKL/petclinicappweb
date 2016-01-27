@@ -4,6 +4,28 @@
     <head>
         <title>Поиск</title>
         <link rel="stylesheet" href="../css/style.css">
+        <script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript">
+            function search() {
+                if (validate()) {
+                    $('#clientName').css('background-color', '');
+                    $('#petName').css('background-color', '');
+
+                } else {
+                    alert("Заполните поля!");
+                }
+            }
+
+            function validate() {
+                var result = true;
+                if (($('#clientName').val() == '')&&($('#petName').val() == '')) {
+                    $('#clientName').css('background-color', 'rgba(255, 0, 45, 0.55)');
+                    $('#petName').css('background-color', 'rgba(255, 0, 45, 0.55)');
+                    result = false;
+                }
+                return result;
+            }
+        </script>
     </head>
     <body>
         <div id="header">
@@ -19,13 +41,13 @@
                 <form action="${pageContext.servletContext.contextPath}/clinic/search" method="POST">
                     <div class="element" >Owner name: </div>
                     <div class="element">
-                        <input type="text" name="client name">
+                        <input type="text" name="client name" id="clientName">
                     </div>
                     <div class="element">Pet name: </div>
                     <div class="element">
-                        <input type="text" name="pet name">
+                        <input type="text" name="pet name" id="petName">
                     </div>
-                    <div class="element"><input type="submit" align="center" value="Edit"/></div>
+                    <div class="element"><input type="submit" align="center" value="Edit" onclick="return search()"/></div>
                 </form>
             </div>
 

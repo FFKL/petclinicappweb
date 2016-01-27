@@ -29,12 +29,12 @@ public class SearchClientServlet extends HttpServlet {
         clientName = req.getParameter("client name");
         petName = req.getParameter("pet name");
         if (!clientName.isEmpty()) {
-            searchByClientName();
+            this.searchByClientName();
         } else if (!petName.isEmpty() && !searchResult.isEmpty()){
             searchResult.clear();
         }
         if (!petName.isEmpty()) {
-            searchByPetName();
+            this.searchByPetName();
         }
         resp.sendRedirect(String.format(FORMAT_PATTERN, req.getContextPath(), REDIRECT_PATH));
     }
