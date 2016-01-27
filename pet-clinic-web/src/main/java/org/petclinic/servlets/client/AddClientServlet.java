@@ -35,7 +35,7 @@ public class AddClientServlet extends HttpServlet {
             clientName = req.getParameter("client name");
             petName = req.getParameter("pet name");
             this.CLINIC_CACHE.add(id, clientName);
-            if (!req.getParameter("pet name").isEmpty()) {
+            if (!petName.isEmpty()) {
                 this.CLINIC_CACHE.addPet(id, req.getParameter("type"), petName);
             }
             resp.sendRedirect(String.format("%s%s", req.getContextPath(), REDIRECT_PATH));
