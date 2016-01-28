@@ -9,7 +9,7 @@
             function editClientName() {
                 if (validateClient()) {
                     $('#clientName').css('background-color', '');
-
+                    document.getElementById("formname").submit();
                 } else {
                     alert("Заполните поля!");
                 }
@@ -17,7 +17,7 @@
             function addPet() {
                 if (validatePet()) {
                     $('#petName').css('background-color', '');
-
+                    document.getElementById("formpet").submit();
                 } else {
                     alert("Заполните поля!");
                 }
@@ -53,15 +53,15 @@
         <div class="container">
             <div class="segment">
             <span>Изменение имени клиента</span>
-                <form action="${pageContext.servletContext.contextPath}/clinic/edit" method="POST">
+                <form id="formname" action="${pageContext.servletContext.contextPath}/clinic/edit" method="POST">
                     <div class="element"><input type="text" name="client name" id="clientName" placeholder="Введите имя клиента"></div>
-                    <div class="element"><input type="submit" align="center" value="Изменить" onclick="return editClientName()"/></div>
+                    <div class="element"><input type="button" value="Изменить" onclick="return editClientName()"/></div>
                 </form>
                 <input type="button" value="Удалить клиента" onClick='location.href="${pageContext.servletContext.contextPath}/clinic/delete?id=${client.getId()}"'>
             </div>
             <div class="segment">
                 <span>Добавление питомца</span>
-                <form action="${pageContext.servletContext.contextPath}/clinic/addpet" method="POST">
+                <form id="formpet" action="${pageContext.servletContext.contextPath}/clinic/addpet" method="POST">
                     <div class="element"><input type="text" name="pet name" id="petName" placeholder="Введите имя питомца"></div>
                     <div class="element">
                         <select name="type">
@@ -70,7 +70,7 @@
                             <option value="Default">DefaultPet</option>
                         </select>
                     </div>
-                    <div class="element"><input type="submit" align="center" value="Добавить" onclick="return addPet()"/></div>
+                    <div class="element"><input type="button" value="Добавить" onclick="return addPet()"/></div>
                 </form>
             </div>
             <div class="segment">

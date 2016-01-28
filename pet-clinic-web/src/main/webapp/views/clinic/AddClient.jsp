@@ -10,6 +10,7 @@
                 if (validate()) {
                     $('#id').css('background-color', '');
                     $('#clientName').css('background-color', '');
+                    document.getElementById("form").submit();
 
                 } else {
                     alert("Заполните поля!");
@@ -41,7 +42,7 @@
         </div>
         <div class="container">
             <div class="segment">
-                <form action="${pageContext.servletContext.contextPath}/clinic/create" method="POST">
+                <form id="form" action="${pageContext.servletContext.contextPath}/clinic/create" method="POST">
                     <div class="element-block">
                         <div class="element">ID: </div>
                         <div class="element"><input type="text" name="id" id="id"></div>
@@ -60,8 +61,7 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="element"><input type="submit" align="center" value="Добавить" onclick="return addClient()"/></div>
+                    <div class="element"><input type="button" value="Добавить" onclick="return addClient()"/></div>
                     <div class="message">${message}</div>
                 </form>
             </div>
