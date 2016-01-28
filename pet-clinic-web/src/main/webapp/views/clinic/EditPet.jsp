@@ -8,7 +8,7 @@
             function editPet() {
                 if (validate()) {
                     $('#petName').css('background-color', '');
-
+                    document.getElementById("form").submit();
                 } else {
                     alert("Заполните поля!");
                 }
@@ -35,10 +35,10 @@
         </div>
         <div class="container">
             <div class="segment">
-                <form action="${pageContext.servletContext.contextPath}/clinic/editpet" method="POST">
+                <form id="form" action="${pageContext.servletContext.contextPath}/clinic/editpet" method="POST">
                     <div class="element">New pet name: </div>
                     <div class="element"><input type="text" name="pet name" id="petName"></div>
-                    <div class="element"><input type="submit" align="center" value="Edit" onclick="return editPet()"/></div>
+                    <div class="element"><input type="button" value="Изменить" onclick="return editPet()"/></div>
                 </form>
             </div>
         </div>

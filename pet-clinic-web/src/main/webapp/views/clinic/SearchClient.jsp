@@ -10,7 +10,7 @@
                 if (validate()) {
                     $('#clientName').css('background-color', '');
                     $('#petName').css('background-color', '');
-
+                    document.getElementById("form").submit();
                 } else {
                     alert("Заполните поля!");
                 }
@@ -38,7 +38,7 @@
         </div>
         <div class="container">
             <div class="segment">
-                <form action="${pageContext.servletContext.contextPath}/clinic/search" method="POST">
+                <form id="form" action="${pageContext.servletContext.contextPath}/clinic/search" method="POST">
                     <div class="element" >Owner name: </div>
                     <div class="element">
                         <input type="text" name="client name" id="clientName">
@@ -47,7 +47,7 @@
                     <div class="element">
                         <input type="text" name="pet name" id="petName">
                     </div>
-                    <div class="element"><input type="submit" align="center" value="Edit" onclick="return search()"/></div>
+                    <div class="element"><input type="button" value="Поиск" onclick="return search()"/></div>
                 </form>
             </div>
 
