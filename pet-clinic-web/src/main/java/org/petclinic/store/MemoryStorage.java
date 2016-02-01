@@ -1,66 +1,67 @@
 package org.petclinic.store;
 
 import org.petclinic.petclinicapp.Client;
+import org.petclinic.petclinicapp.Clinic;
 import org.petclinic.petclinicapp.Exceptions.IDException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
 
 import java.util.List;
 
-public class ClinicCache implements Storage {
+public class MemoryStorage implements Storage {
+
+    private static final Clinic CLINIC = new Clinic();
 
     private static final ClinicCache INSTANCE = new ClinicCache();
-
-    private final Storage storage = new MemoryStorage();
 
     public static ClinicCache getInstance() {
         return INSTANCE;
     }
 
     public void add(int id, String clientName) throws WrongInputException, IDException {
-        this.storage.add(id, clientName);
+        CLINIC.addClient(id, clientName);
     }
 
     public void addPet(int id, String petType, String petName) throws IDException, WrongInputException {
-        this.storage.addPet(id, petType, petName);
+        CLINIC.addPetForClient(id, petType, petName);
     }
 
     public void editClientName(int id, String clientName) throws WrongInputException, IDException {
-        this.storage.editClientName(id, clientName);
+        CLINIC.changeClientName(id, clientName);
     }
 
     public void editPetName(int id, String currentPetName, String newPetName) throws WrongInputException, IDException {
-        this.storage.editPetName(id, currentPetName, newPetName);
+        CLINIC.changePetName(id, currentPetName, newPetName);
     }
 
     public List<Client> searchByPetName(String petName) throws WrongInputException {
-        return this.storage.searchByPetName(petName);
+        return CLINIC.findClientsByPetName(petName);
     }
 
     public List<Client> searchByClientName(String clientName) throws WrongInputException {
-        return this.storage.searchByClientName(clientName);
+        return CLINIC.findByClientName(clientName);
     }
 
     public Client searchById(int id) throws IDException {
-        return this.storage.searchById(id);
+        return CLINIC.findById(id);
     }
 
     public void delClient(int id) throws IDException {
-        this.storage.delClient(id);
+        CLINIC.removeClient(id);
     }
 
     public void delPet(int id, String petName) throws WrongInputException, IDException {
-        this.storage.delPet(id, petName);
+        CLINIC.removePet(id, petName);
     }
 
     public List<Client> getClients() {
-        return this.storage.getClients();
+        return CLINIC.getClients();
     }
 
     public void removeAll() {
-        this.storage.removeAll();
+        CLINIC.removeAll();
     }
 
     public boolean isEmpty() {
-        return this.storage.isEmpty();
+        return CLINIC.isEmpty();
     }
 }
