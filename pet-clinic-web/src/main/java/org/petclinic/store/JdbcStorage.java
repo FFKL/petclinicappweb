@@ -3,7 +3,6 @@ package org.petclinic.store;
 import org.petclinic.petclinicapp.Client;
 import org.petclinic.petclinicapp.Exceptions.IDException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
-import org.petclinic.petclinicapp.Pets.Cat;
 import org.petclinic.petclinicapp.Pets.Pet;
 import org.petclinic.petclinicapp.Pets.PetCreate;
 import org.petclinic.petclinicapp.Pets.PetType;
@@ -61,11 +60,31 @@ public class JdbcStorage implements Storage {
     }
 
     public List<Client> searchByClientName(String clientName) throws WrongInputException {
-        return null;
+        List<Client> clients = new ArrayList<>();
+        try (final PreparedStatement preparedStatement = this.connection.prepareStatement("select * from client where name=(?)");) {
+            preparedStatement.setString(1, clientName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            clients = creatingClientList(resultSet);
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clients;
     }
 
     public Client searchById(int id) throws IDException {
-        return null;
+        Client client = null;
+        try (final PreparedStatement preparedStatement = this.connection.prepareStatement("select * from client where uid=(?)");) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Client> clients = creatingClientList(resultSet);
+            if (clients.size() != 0)
+                client = clients.get(0);
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return client;
     }
 
     public void delClient(int id) throws IDException {
@@ -77,17 +96,10 @@ public class JdbcStorage implements Storage {
     }
 
     public List<Client> getClients() {
-        final List<Client> clients = new ArrayList<>();
+        List<Client> clients = new ArrayList<>();
         try (final Statement statement = this.connection.createStatement();
              final ResultSet rs = statement.executeQuery("select * from client")) {
-            while (rs.next()) {
-                Client client = new Client(rs.getInt("uid"), rs.getString("name"));
-                List<Pet> pets = this.getPets(rs.getInt("uid"));
-                for (Pet p: pets) {
-                    client.addPet(p.getPetType(), p.getName());
-                }
-                clients.add(client);
-            }
+            clients = creatingClientList(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -102,12 +114,11 @@ public class JdbcStorage implements Storage {
         return false;
     }
 
-    public List<Pet> getPets(int id) {
+    private List<Pet> getPets(int id) {
         final List<Pet> pets = new ArrayList<>();
         try (final PreparedStatement preparedStatement = this.connection.prepareStatement("select * from pet where client_id=(?)");) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            System.out.println(resultSet);
             while (resultSet.next())
                 pets.add(PetCreate.createPet(PetType.selectPetType(resultSet.getString("type")), resultSet.getString("name")));
             resultSet.close();
@@ -115,5 +126,18 @@ public class JdbcStorage implements Storage {
             e.printStackTrace();
         }
         return pets;
+    }
+
+    private List<Client> creatingClientList(ResultSet rs) throws SQLException {
+        final List<Client> clients = new ArrayList<>();
+        while (rs.next()) {
+            Client client = new Client(rs.getInt("uid"), rs.getString("name"));
+            List<Pet> pets = this.getPets(rs.getInt("uid"));
+            for (Pet p: pets) {
+                client.addPet(p.getPetType(), p.getName());
+            }
+            clients.add(client);
+        }
+        return clients;
     }
 }
