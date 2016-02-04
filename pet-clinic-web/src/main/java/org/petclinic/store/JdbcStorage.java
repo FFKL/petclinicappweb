@@ -69,7 +69,20 @@ public class JdbcStorage implements Storage {
     }
 
     public List<Client> searchByPetName(String petName) throws WrongInputException {
-        return null;
+        List<Client> clients = new ArrayList<>();
+        try (final PreparedStatement preparedStatement = this.connection.prepareStatement("select client_id from pet where name=(?);");) {
+            preparedStatement.setString(1, petName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                clients.add(this.searchById(resultSet.getInt("client_id")));
+            }
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IDException e) {
+            e.printStackTrace();
+        }
+        return clients;
     }
 
     public List<Client> searchByClientName(String clientName) throws WrongInputException {
@@ -132,7 +145,10 @@ public class JdbcStorage implements Storage {
     }
 
     public void removeAll() {
-
+        try (final Statement statement = this.connection.prepareStatement("delete from pet; delete from client");) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isEmpty() {
