@@ -48,11 +48,24 @@ public class JdbcStorage implements Storage {
     }
 
     public void editClientName(int id, String clientName) throws WrongInputException, IDException {
-
+        try (final PreparedStatement statement = this.connection.prepareStatement("update client set name=(?) where uid=(?)");) {
+            statement.setString(1, clientName);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void editPetName(int id, String currentPetName, String newPetName) throws WrongInputException, IDException {
-
+        try (final PreparedStatement statement = this.connection.prepareStatement("update pet set name=(?) where client_id=(?) and name=(?)");) {
+            statement.setString(1, newPetName);
+            statement.setInt(2, id);
+            statement.setString(3, currentPetName);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Client> searchByPetName(String petName) throws WrongInputException {
@@ -88,11 +101,23 @@ public class JdbcStorage implements Storage {
     }
 
     public void delClient(int id) throws IDException {
-
+        try (final PreparedStatement statement = this.connection.prepareStatement("delete from pet where client_id=(?); delete from client where uid=(?)");) {
+            statement.setInt(1, id);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void delPet(int id, String petName) throws WrongInputException, IDException {
-
+        try (final PreparedStatement statement = this.connection.prepareStatement("delete from pet where client_id=(?) and name=(?)");) {
+            statement.setInt(1, id);
+            statement.setString(2, petName);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Client> getClients() {
