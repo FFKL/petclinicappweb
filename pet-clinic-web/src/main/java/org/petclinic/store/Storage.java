@@ -8,27 +8,27 @@ import java.util.List;
 
 public interface Storage {
 
-    public void add(int id, String clientName) throws WrongInputException, IDException;
+    void add(String clientName) throws WrongInputException, IDException;
 
-    public void addPet(int id, String petType, String petName) throws IDException, WrongInputException;
+    void addPet(int id, String petType, String petName) throws IDException, WrongInputException;
 
-    public void editClientName(int id, String clientName) throws WrongInputException, IDException;
+    void editClientName(int id, String clientName) throws WrongInputException, IDException;
 
-    public void editPetName(int id, String currentPetName, String newPetName) throws WrongInputException, IDException;
+    void editPetName(int id, String currentPetName, String newPetName) throws WrongInputException, IDException;
 
-    public List<Client> searchByPetName(String petName) throws WrongInputException;
+    List<Client> searchByPetName(String petName) throws WrongInputException;
 
-    public List<Client> searchByClientName(String clientName) throws WrongInputException;
+    List<Client> searchByClientName(String clientName) throws WrongInputException;
 
-    public Client searchById(int id) throws IDException;
+    Client searchById(int id) throws IDException;
 
-    public void delClient(int id) throws IDException;
+    void delClient(int id) throws IDException;
 
-    public void delPet(int id, String petName) throws WrongInputException, IDException;
+    void delPet(int id, String petName) throws WrongInputException, IDException;
 
-    public List<Client> getClients();
+    List<Client> getClients();
 
-    public void removeAll();
+    void removeAll();
 
-    public boolean isEmpty();
+    boolean isEmpty();
 }

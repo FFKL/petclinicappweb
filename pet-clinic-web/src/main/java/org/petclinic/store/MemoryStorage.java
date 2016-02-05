@@ -6,10 +6,13 @@ import org.petclinic.petclinicapp.Exceptions.IDException;
 import org.petclinic.petclinicapp.Exceptions.WrongInputException;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MemoryStorage implements Storage {
 
     private static final Clinic CLINIC = new Clinic();
+
+    private final AtomicInteger idCreator = new AtomicInteger();
 
     private static final ClinicCache INSTANCE = new ClinicCache();
 
@@ -17,8 +20,8 @@ public class MemoryStorage implements Storage {
         return INSTANCE;
     }
 
-    public void add(int id, String clientName) throws WrongInputException, IDException {
-        CLINIC.addClient(id, clientName);
+    public void add(String clientName) throws WrongInputException, IDException {
+        CLINIC.addClient(createId(), clientName);
     }
 
     public void addPet(int id, String petType, String petName) throws IDException, WrongInputException {
@@ -59,9 +62,14 @@ public class MemoryStorage implements Storage {
 
     public void removeAll() {
         CLINIC.removeAll();
+        idCreator.set(0);
     }
 
     public boolean isEmpty() {
         return CLINIC.isEmpty();
+    }
+
+    private int createId() {
+        return this.idCreator.incrementAndGet();
     }
 }

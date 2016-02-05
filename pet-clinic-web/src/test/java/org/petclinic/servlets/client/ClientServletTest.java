@@ -1,10 +1,12 @@
 package org.petclinic.servlets.client;
 
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;
 import org.petclinic.petclinicapp.Client;
 import org.petclinic.store.ClinicCache;
+import org.petclinic.store.MemoryStorage;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,11 @@ import java.util.List;
 public class ClientServletTest extends Mockito {
 
     final ClinicCache CLINIC_CACHE = ClinicCache.getInstance();
+
+    @Before
+    public void setUp() throws Exception {
+        CLINIC_CACHE.setStorage(new MemoryStorage());
+    }
 
     @Test
     public void testAddClient() throws Exception {
@@ -44,10 +51,10 @@ public class ClientServletTest extends Mockito {
     public void testDelClient() throws Exception {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
-
-        CLINIC_CACHE.add(3, "Fedor");
-        CLINIC_CACHE.addPet(3, "Cat", "Pushok");
-        when(req.getParameter("id")).thenReturn("3");
+        CLINIC_CACHE.removeAll();
+        CLINIC_CACHE.add("Fedor");
+        CLINIC_CACHE.addPet(1, "Cat", "Pushok");
+        when(req.getParameter("id")).thenReturn("1");
         assertFalse(CLINIC_CACHE.getClients().isEmpty());
 
         new DeleteClientServlet().doGet(req, resp);
@@ -61,14 +68,14 @@ public class ClientServletTest extends Mockito {
         HttpServletResponse resp = mock(HttpServletResponse.class);
         RequestDispatcher requestDispatcher = mock(RequestDispatcher.class);
 
-        CLINIC_CACHE.add(2, "Fedor");
+        CLINIC_CACHE.add("Fedor");
+        CLINIC_CACHE.addPet(1, "Cat", "Pushok");
+        CLINIC_CACHE.add("Fedor");
         CLINIC_CACHE.addPet(2, "Cat", "Pushok");
-        CLINIC_CACHE.add(3, "Fedor");
-        CLINIC_CACHE.addPet(3, "Cat", "Pushok");
 
         assertFalse(CLINIC_CACHE.getClients().isEmpty());
 
-        when(req.getParameter("id")).thenReturn("3");
+        when(req.getParameter("id")).thenReturn("2");
         when(req.getParameter("client name")).thenReturn("Grigoriy");
         when(req.getRequestDispatcher("/views/clinic/ClientView.jsp")).thenReturn(requestDispatcher);
 
@@ -78,7 +85,7 @@ public class ClientServletTest extends Mockito {
         new EditClientServlet().doPost(req, resp);
         verify(req, atLeast(1)).getParameter("client name");
 
-        Client c = new Client(3, "Grigoriy");
+        Client c = new Client(2, "Grigoriy");
         c.addPet("Cat", "Pushok");
         assertEquals(c, CLINIC_CACHE.getClients().get(1));
 
@@ -97,11 +104,11 @@ public class ClientServletTest extends Mockito {
         clients.add(new Client(3, "Mariya"));
         clients.get(1).addPet("Cat", "Pushok");
 
-        CLINIC_CACHE.add(1, "Mariya");
+        CLINIC_CACHE.add("Mariya");
         CLINIC_CACHE.addPet(1, "Cat", "Snezhok");
-        CLINIC_CACHE.add(2, "Igor");
+        CLINIC_CACHE.add("Igor");
         CLINIC_CACHE.addPet(2, "Dog", "Killer");
-        CLINIC_CACHE.add(3, "Mariya");
+        CLINIC_CACHE.add("Mariya");
         CLINIC_CACHE.addPet(3, "Cat", "Pushok");
 
         assertFalse(CLINIC_CACHE.getClients().isEmpty());
@@ -128,11 +135,11 @@ public class ClientServletTest extends Mockito {
         clients.add(new Client(3, "Mariya"));
         clients.get(0).addPet("Cat", "Pushok");
 
-        CLINIC_CACHE.add(1, "Mariya");
+        CLINIC_CACHE.add("Mariya");
         CLINIC_CACHE.addPet(1, "Cat", "Snezhok");
-        CLINIC_CACHE.add(2, "Igor");
+        CLINIC_CACHE.add("Igor");
         CLINIC_CACHE.addPet(2, "Dog", "Killer");
-        CLINIC_CACHE.add(3, "Mariya");
+        CLINIC_CACHE.add("Mariya");
         CLINIC_CACHE.addPet(3, "Cat", "Pushok");
 
         assertFalse(CLINIC_CACHE.getClients().isEmpty());

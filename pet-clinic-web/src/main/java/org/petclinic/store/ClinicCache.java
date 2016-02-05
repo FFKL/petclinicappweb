@@ -10,14 +10,18 @@ public class ClinicCache implements Storage {
 
     private static final ClinicCache INSTANCE = new ClinicCache();
 
-    private final Storage storage = new MemoryStorage();
+    private Storage storage = new JdbcStorage();
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
 
     public static ClinicCache getInstance() {
         return INSTANCE;
     }
 
-    public void add(int id, String clientName) throws WrongInputException, IDException {
-        this.storage.add(id, clientName);
+    public void add(String clientName) throws WrongInputException, IDException {
+        this.storage.add(clientName);
     }
 
     public void addPet(int id, String petType, String petName) throws IDException, WrongInputException {

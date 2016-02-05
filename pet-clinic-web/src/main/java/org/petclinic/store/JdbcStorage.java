@@ -13,26 +13,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcStorage implements Storage {
+
     private final Connection connection;
 
     public JdbcStorage() {
         final Settings settings = Settings.getInstance();
+        try {
+            Class.forName(settings.value("jdbc.driver_class"));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         try {
             this.connection = DriverManager.getConnection(settings.value("jdbc.url"), settings.value("jdbc.username"), settings.value("jdbc.password"));
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
     }
-    //// TODO: 02.02.2016 rework generate id
-    public void add(int id, String clientName) {
+
+    public void add(String clientName) throws WrongInputException, IDException {
         try (final PreparedStatement statement = this.connection.prepareStatement("insert into client (name) values (?)", Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, clientName);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //throw new IllegalStateException("Could not create new user");
-
     }
 
     public void addPet(int id, String petType, String petName) throws IDException, WrongInputException {
@@ -145,7 +149,8 @@ public class JdbcStorage implements Storage {
     }
 
     public void removeAll() {
-        try (final Statement statement = this.connection.prepareStatement("delete from pet; delete from client");) {
+        try (final PreparedStatement statement = this.connection.prepareStatement("delete from pet; delete from client; ALTER SEQUENCE client_uid_seq RESTART WITH 1; ALTER SEQUENCE pet_uid_seq RESTART WITH 1");) {
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

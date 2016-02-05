@@ -34,7 +34,7 @@ public class AddClientServlet extends HttpServlet {
             id = Integer.parseInt(req.getParameter("id"));
             clientName = req.getParameter("client name");
             petName = req.getParameter("pet name");
-            this.CLINIC_CACHE.add(id, clientName);
+            this.CLINIC_CACHE.add(clientName);
             if (!petName.isEmpty()) {
                 this.CLINIC_CACHE.addPet(id, req.getParameter("type"), petName);
             }
