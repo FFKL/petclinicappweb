@@ -31,4 +31,6 @@ public interface Storage {
     void removeAll();
 
     boolean isEmpty();
+
+    void close();
 }

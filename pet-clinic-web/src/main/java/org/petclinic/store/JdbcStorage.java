@@ -80,7 +80,6 @@ public class JdbcStorage implements Storage {
             while (resultSet.next()) {
                 clients.add(this.searchById(resultSet.getInt("client_id")));
             }
-            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IDException e) {
@@ -95,7 +94,6 @@ public class JdbcStorage implements Storage {
             preparedStatement.setString(1, clientName);
             ResultSet resultSet = preparedStatement.executeQuery();
             clients = creatingClientList(resultSet);
-            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -110,7 +108,6 @@ public class JdbcStorage implements Storage {
             List<Client> clients = creatingClientList(resultSet);
             if (clients.size() != 0)
                 client = clients.get(0);
-            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -157,6 +154,8 @@ public class JdbcStorage implements Storage {
     }
 
     public boolean isEmpty() {
+        if (this.getClients().size() == 0)
+            return true;
         return false;
     }
 
@@ -167,7 +166,6 @@ public class JdbcStorage implements Storage {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
                 pets.add(PetCreate.createPet(PetType.selectPetType(resultSet.getString("type")), resultSet.getString("name")));
-            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -185,5 +183,17 @@ public class JdbcStorage implements Storage {
             clients.add(client);
         }
         return clients;
+    }
+
+    public Connection getConnection() {
+        return this.connection;
+    }
+
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

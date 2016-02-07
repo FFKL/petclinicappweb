@@ -67,4 +67,8 @@ public class ClinicCache implements Storage {
     public boolean isEmpty() {
         return this.storage.isEmpty();
     }
+
+    public void close() {
+        this.storage.close();
+    }
 }

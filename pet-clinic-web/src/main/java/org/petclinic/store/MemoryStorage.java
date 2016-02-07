@@ -69,6 +69,10 @@ public class MemoryStorage implements Storage {
         return CLINIC.isEmpty();
     }
 
+    public void close() {
+
+    }
+
     private int createId() {
         return this.idCreator.incrementAndGet();
     }
