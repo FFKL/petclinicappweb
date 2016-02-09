@@ -26,6 +26,9 @@ public class Client {
         this.clientName = clientName;
     }
 
+    public Client() {
+    }
+
     public void addPet(String petType, String petName) {
         PetType type = PetType.selectPetType(petType);
         Pet newPet = PetCreate.createPet(type, petName);
@@ -114,5 +117,18 @@ public class Client {
         result = 31*result + this.id;
         result = 31*result + this.getPets().hashCode();
         return result;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Pet> getPetList() {
+        return petList;
+    }
+
+    public void setPetList(List<Pet> petList) {
+        this.petList = petList;
     }
 }
