@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.petclinic.petclinicapp.Client" table="Client">
+        <meta attribute="class=description">
+            This class contains the client detail.
+        </meta>
+        <id name="id" type="int" column="uid">
+            <generator class="identity"/>
+        </id>
+        <property name="clientName" type="java.lang.String" column="name"/>
+    </class>
+</hibernate-mapping>
