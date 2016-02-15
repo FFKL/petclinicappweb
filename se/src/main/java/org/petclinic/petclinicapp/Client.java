@@ -3,9 +3,12 @@ package org.petclinic.petclinicapp;
 import org.petclinic.petclinicapp.Pets.Pet;
 import org.petclinic.petclinicapp.Pets.PetCreate;
 import org.petclinic.petclinicapp.Pets.PetType;
+import org.petclinic.models.Message;
 
+import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Клиент
@@ -18,6 +21,25 @@ public class Client {
     private int id = 0;
     private String clientName;
     private List<Pet> petList = new ArrayList<Pet>();
+    private Role role;
+    private Set<Message> messages;
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     /**
      * Конструктор
      */

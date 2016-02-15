@@ -10,7 +10,7 @@
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">root</property>
 
-        <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+        <!--<property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>-->
         <property name="hibernate.c3p0.min_size">7</property>
         <property name="hibernate.c3p0.max_size">53</property>
         <property name="hibernate.c3p0.timeout">100</property>
@@ -21,5 +21,7 @@
         <!-- List of XML mapping files -->
         <mapping resource="org/petclinic/models/Client.hbm.xml"/>
         <mapping resource="org/petclinic/models/Pet.hbm.xml"/>
+        <mapping resource="org/petclinic/models/Messages.hbm.xml"/>
+        <mapping resource="org/petclinic/models/Role.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
