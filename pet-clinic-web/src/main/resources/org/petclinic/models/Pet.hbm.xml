@@ -3,7 +3,7 @@
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="org.petclinic.models.PetModel" table="Pet">
+    <class name="org.petclinic.models.Hibernate.Pet" table="Pet">
         <meta attribute="class=description">
             This class contains the client detail.
         </meta>
