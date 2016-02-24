@@ -10,6 +10,12 @@
         <id name="id" type="int" column="uid">
             <generator class="identity"/>
         </id>
-        <property name="clientName" type="java.lang.String" column="name"/>
+        <property name="clientName" type="string" column="name"/>
+        <many-to-one name="role" column="role_id" class="org.petclinic.models.Role" cascade="save-update"/>
+
+        <set name="messages" table="messages" lazy="false" inverse="true" cascade="all" >
+            <key column="client_id" not-null="true"/>
+            <one-to-many class="org.petclinic.models.Message"/>
+        </set>
     </class>
 </hibernate-mapping>
