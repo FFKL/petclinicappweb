@@ -1,4 +1,5 @@
 package org.petclinic.store.Hibernate;
 
-public class PetStorage {
+public class PetStorage extends BaseStorage {
+
 }

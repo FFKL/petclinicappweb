@@ -3,6 +3,8 @@ package org.petclinic.models.Hibernate;
 import java.util.Set;
 
 public class Client {
+    private final String FORMAT_STRING = "%s%s%s%s%s%s";
+
     private int id;
     private String clientName;
     private Set<Pet> pets;
@@ -30,4 +32,34 @@ public class Client {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return String.format(FORMAT_STRING, "ID: ", this.getId(), "; ClientName: ", this.getClientName(), "; PetList: ", this.getPets());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Client e = (Client) obj;
+        return (this.getId() == e.getId() && this.getClientName() == e.getClientName() && this.getPets().equals(e.getPets()));
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 5;
+        result = 31*result + this.getClientName().hashCode();
+        result = 31*result + this.getId();
+        result = 31*result + this.getPets().hashCode();
+        return result;
+    }
+
 }
