@@ -3,10 +3,12 @@ package org.petclinic.store.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.petclinic.models.Hibernate.Client;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
 
+@Repository
 public class ClientStorage extends BaseStorage {
 
     public int add(final Client client) {
