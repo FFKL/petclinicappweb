@@ -9,6 +9,15 @@ public class Client {
     private String clientName;
     private Set<Pet> pets;
 
+    /*public Client(int id, String clientName, Set<Pet> pets) {
+        this.id = id;
+        this.clientName = clientName;
+        this.pets = pets;
+    }
+
+    public Client() {
+    }*/
+
     public Set<Pet> getPets() {
         return pets;
     }

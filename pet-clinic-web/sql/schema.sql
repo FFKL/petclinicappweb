@@ -38,3 +38,8 @@ ALTER TABLE pets
   ADD CONSTRAINT pet_type_fkey FOREIGN KEY (type)
       REFERENCES pet_type (type) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE pets
+  ADD CONSTRAINT pets_client_id_fkey FOREIGN KEY (client_id)
+      REFERENCES clients (uid) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;

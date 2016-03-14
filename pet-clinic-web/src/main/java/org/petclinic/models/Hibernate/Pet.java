@@ -4,9 +4,18 @@ public class Pet {
     private final String FORMAT_STRING = "%s%s%s%s";
 
     private int id;
-    private int clientId;
+    private Client client;
     private String petName;
     private String petType;
+
+    /*public Pet() {
+    }
+
+    public Pet(Client client, String petName, String petType) {
+        this.client = client;
+        this.petName = petName;
+        this.petType = petType;
+    }*/
 
     public String getPetType() {
         return petType;
@@ -24,12 +33,12 @@ public class Pet {
         this.petName = petName;
     }
 
-    public int getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public int getId() {
@@ -45,7 +54,7 @@ public class Pet {
         return String.format(FORMAT_STRING, "PetType: ", this.getPetType(), "; PetName: ", this.getPetName());
     }
 
-    @Override
+    /*@Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -57,7 +66,7 @@ public class Pet {
             return false;
         }
         Pet e = (Pet) obj;
-        return (this.getPetName() == e.getPetName() && this.getPetType() == e.getPetType() && this.getClientId() == e.getClientId());
+        return (this.getPetName() == e.getPetName() && this.getPetType() == e.getPetType() && this.getClient() == e.getClient());
     }
 
     @Override
@@ -65,7 +74,6 @@ public class Pet {
         int result = 5;
         result = 31*result + this.getPetType().hashCode();
         result = 31*result + this.getPetName().hashCode();
-        result = 31*result + this.getClientId();
         return result;
-    }
+    }*/
 }

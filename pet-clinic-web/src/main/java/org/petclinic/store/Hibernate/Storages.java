@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Storages {
-    public final ClientStorage clientStorage;
-    public final PetStorage petStorage;
+    public final ClientDAO clientStorage;
+    public final PetDAO petStorage;
 
     @Autowired
-    public Storages(final ClientStorage clientStorage, final PetStorage petStorage) {
+    public Storages(final ClientDAO clientStorage, final PetDAO petStorage) {
         this.clientStorage = clientStorage;
         this.petStorage = petStorage;
     }
