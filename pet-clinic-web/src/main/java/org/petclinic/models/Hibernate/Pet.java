@@ -1,21 +1,21 @@
 package org.petclinic.models.Hibernate;
 
 public class Pet {
-    private final String FORMAT_STRING = "%s%s%s%s";
+    private final String FORMAT_STRING = "%s%s%s%s%s%s";
 
     private int id;
     private Client client;
     private String petName;
     private String petType;
 
-    /*public Pet() {
+    public Pet() {
     }
 
     public Pet(Client client, String petName, String petType) {
         this.client = client;
         this.petName = petName;
         this.petType = petType;
-    }*/
+    }
 
     public String getPetType() {
         return petType;
@@ -51,7 +51,7 @@ public class Pet {
 
     @Override
     public String toString() {
-        return String.format(FORMAT_STRING, "PetType: ", this.getPetType(), "; PetName: ", this.getPetName());
+        return String.format(FORMAT_STRING,"ID: ", this.getId(), "PetType: ", this.getPetType(), "; PetName: ", this.getPetName());
     }
 
     /*@Override

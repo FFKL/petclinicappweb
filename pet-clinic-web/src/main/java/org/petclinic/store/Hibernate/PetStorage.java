@@ -32,7 +32,7 @@ public class PetStorage implements PetDAO {
 
     @Override
     public void edit(Pet edit) {
-
+        this.template.update(edit);
     }
 
     @Transactional
