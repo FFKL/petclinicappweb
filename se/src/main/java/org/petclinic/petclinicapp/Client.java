@@ -6,7 +6,6 @@ import org.petclinic.petclinicapp.Pets.PetType;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Клиент
  */
@@ -18,6 +17,7 @@ public class Client {
     private int id = 0;
     private String clientName;
     private List<Pet> petList = new ArrayList<Pet>();
+
     /**
      * Конструктор
      */

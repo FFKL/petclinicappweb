@@ -3,17 +3,14 @@
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="org.petclinic.models.Hibernate.Client" table="clients" lazy="false">
+    <class name="org.petclinic.models.Message" table="messages">
         <meta attribute="class=description">
             This class contains the client detail.
         </meta>
         <id name="id" type="int" column="uid">
             <generator class="identity"/>
         </id>
-        <property name="clientName" type="string" column="name"/>
-        <set name="pets" table="pets" lazy="false" inverse="true" cascade="all" >
-            <key column="client_id" not-null="true"/>
-            <one-to-many class="org.petclinic.models.Hibernate.Pet"/>
-        </set>
+        <many-to-one name="client" class="org.petclinic.petclinicapp.Client" column="client_id" cascade="all"/>
+        <property name="text" type="string" column="text"/>
     </class>
 </hibernate-mapping>

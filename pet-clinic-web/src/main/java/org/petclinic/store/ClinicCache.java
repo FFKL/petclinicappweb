@@ -10,7 +10,7 @@ public class ClinicCache implements Storage {
 
     private static final ClinicCache INSTANCE = new ClinicCache();
 
-    private Storage storage = new JdbcStorage();
+    private Storage storage = new HibernateStorage();
 
     public void setStorage(Storage storage) {
         this.storage = storage;

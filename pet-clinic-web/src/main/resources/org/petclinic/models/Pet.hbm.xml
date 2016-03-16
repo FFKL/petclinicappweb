@@ -3,15 +3,15 @@
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="org.petclinic.models.PetModel" table="Pet">
+    <class name="org.petclinic.models.Hibernate.Pet" table="pets" lazy="false">
         <meta attribute="class=description">
             This class contains the client detail.
         </meta>
         <id name="id" type="int" column="uid">
-            <generator class="increment"/>
+            <generator class="identity"/>
         </id>
-        <property name="clientId" type="int" column="client_id"/>
-        <property name="petName" type="java.lang.String" column="name"/>
-        <property name="petType" type="java.lang.String" column="type"/>
+        <many-to-one name="client" column="client_id" class="org.petclinic.models.Hibernate.Client" cascade="all"/>
+        <property name="petName" type="string" column="name"/>
+        <property name="petType" type="string" column="type"/>
     </class>
 </hibernate-mapping>

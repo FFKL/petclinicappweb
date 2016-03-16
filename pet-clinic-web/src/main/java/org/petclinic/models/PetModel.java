@@ -52,8 +52,8 @@ public class PetModel {
         this.clientId = clientId;
     }
 
-    public Pet getPet() {
+    /*public Pet getPet() {
         return PetCreate.createPet(PetType.selectPetType(petType), petName);
-    }
+    }*/
 
 }

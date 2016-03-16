@@ -3,6 +3,7 @@
 classes
 
 # Package Files #
+DBTool.java
 *.jar
 *.war
 

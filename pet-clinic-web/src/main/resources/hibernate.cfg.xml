@@ -6,19 +6,23 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/Clinic</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/MyClinic</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">root</property>
 
-        <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+        <!--<property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>-->
         <property name="hibernate.c3p0.min_size">7</property>
         <property name="hibernate.c3p0.max_size">53</property>
         <property name="hibernate.c3p0.timeout">100</property>
         <property name="hibernate.c3p0.max_statements">50</property>
         <property name="hibernate.c3p0.idle_test_period">1000</property>
         <property name="hibernate.c3p0.validate">true</property>
+        <property name="show_sql">true</property>
 
         <!-- List of XML mapping files -->
+     <!--   <mapping resource="org/petclinic/models/Messages.hbm.xml"/>
+        <mapping resource="org/petclinic/models/Role.hbm.xml"/>-->
+        <!-- MyClinic mapping -->
         <mapping resource="org/petclinic/models/Client.hbm.xml"/>
         <mapping resource="org/petclinic/models/Pet.hbm.xml"/>
     </session-factory>
