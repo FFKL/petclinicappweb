@@ -1,6 +1,5 @@
 package org.petclinic.store.Hibernate;
 
-import org.petclinic.models.Hibernate.Client;
 import org.petclinic.models.Hibernate.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -39,15 +38,13 @@ public class PetStorage implements PetDAO {
     @Override
     public void delete(int id) {
         Pet pet = new Pet();
-        Client client = new Client();
-        client.setId(id);
-        pet.setClient(client);
+        pet.setId(id);
         this.template.delete(pet);
     }
 
     @Transactional
     public void delete(final String name) {
-        /*this.template.delete(new Pet(0, name, null));*/
+        this.template.delete(new Pet(null, name, null));
     }
 
     @Transactional

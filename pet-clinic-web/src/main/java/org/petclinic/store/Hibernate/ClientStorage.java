@@ -1,7 +1,6 @@
 package org.petclinic.store.Hibernate;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+
 import org.petclinic.models.Hibernate.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -70,12 +69,6 @@ public class ClientStorage implements ClientDAO {
 
 
     public Collection<Client> values() {
-        /*return transaction(new Command<Collection<Client>>() {
-            @Override
-            public Collection<Client> process(Session session) {
-                return session.createQuery("from Client").list();
-            }
-        });*/
         return (List<Client>) this.template.find("from Client");
     }
 }
