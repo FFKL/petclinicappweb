@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.*;
 public class JdbcStorageTest {
 
-    //// TODO: 07.02.2016 refactor
+    /*//// TODO: 07.02.2016 refactor
     @Test
     public void testAdd() throws Exception {
         JdbcStorage storage = new JdbcStorage();
@@ -31,5 +31,5 @@ public class JdbcStorageTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
