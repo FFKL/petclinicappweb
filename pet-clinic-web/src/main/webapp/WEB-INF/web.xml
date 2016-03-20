@@ -41,7 +41,7 @@
         based on the recommendations of the Applications Developer's Guide
     </description>
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>ClinicViewServlet</servlet-name>
         <servlet-class>org.petclinic.servlets.ClinicViewServlet</servlet-class>
     </servlet>
@@ -50,7 +50,7 @@
         <servlet-name>ClinicViewServlet</servlet-name>
         <url-pattern>/clinic/view</url-pattern>
     </servlet-mapping>
-
+-->
     <servlet>
         <servlet-name>ClientViewServlet</servlet-name>
         <servlet-class>org.petclinic.servlets.client.ClientViewServlet</servlet-class>
@@ -61,7 +61,7 @@
         <url-pattern>/clinic/client</url-pattern>
     </servlet-mapping>
     
-    <servlet>
+    <!--<servlet>
         <servlet-name>AddClientServlet</servlet-name>
         <servlet-class>org.petclinic.servlets.client.AddClientServlet</servlet-class>
     </servlet>
@@ -69,7 +69,7 @@
     <servlet-mapping>
         <servlet-name>AddClientServlet</servlet-name>
         <url-pattern>/clinic/create</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
     <servlet>
         <servlet-name>AddPetServlet</servlet-name>

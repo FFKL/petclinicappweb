@@ -3,12 +3,11 @@
 <html>
     <head>
         <title>Добавление клиента</title>
-        <link rel="stylesheet" href="../css/style.css">
-        <script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
+        <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript">
             function addClient() {
                 if (validate()) {
-                    $('#id').css('background-color', '');
                     $('#clientName').css('background-color', '');
                     document.getElementById("form").submit();
 
@@ -19,10 +18,6 @@
 
             function validate() {
                 var result = true;
-                if ($('#id').val() == '') {
-                    $('#id').css('background-color', 'rgba(255, 0, 45, 0.55)');
-                    result = false;
-                }
                 if ($('#clientName').val() == '') {
                     $('#clientName').css('background-color', 'rgba(255, 0, 45, 0.55)');
                     result = false;
@@ -44,17 +39,15 @@
             <div class="segment">
                 <form id="form" action="${pageContext.servletContext.contextPath}/clinic/create" method="POST">
                     <div class="element-block">
-                        <div class="element">ID: </div>
-                        <div class="element"><input type="text" name="id" id="id"></div>
                         <div class="element">Имя клиента: </div>
-                        <div class="element"><input type="text" name="client name" id="clientName"></div>
+                        <div class="element"><input type="text" name="clientName"></div>
                     </div>
                     <div class="element-block">
                         <div class="element">Имя питомца: </div>
-                        <div class="element"><input type="text" name="pet name"></div>
+                        <div class="element"><input type="text" name="petName"></div>
                         <div class="element">Тип питомца: </div>
                         <div class="element">
-                            <select name="type">
+                            <select name="petType">
                                 <option value="Cat">Cat</option>
                                 <option value="Dog">Dog</option>
                                 <option value="Default">DefaultPet</option>
