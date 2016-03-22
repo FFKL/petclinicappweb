@@ -1,9 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
         <title>Изменение имени питомца</title>
-        <link rel="stylesheet" href="../css/style.css">
-        <script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
+        <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript">
             function editPet() {
                 if (validate()) {
@@ -37,7 +38,8 @@
             <div class="segment">
                 <form id="form" action="${pageContext.servletContext.contextPath}/clinic/editpet" method="POST">
                     <div class="element">New pet name: </div>
-                    <div class="element"><input type="text" name="pet name" id="petName"></div>
+                    <div class="element"><input type="text" name="petName" id="petName"></div>
+                    <input type="hidden" name="id" value="${pet.id}">
                     <div class="element"><input type="button" value="Изменить" onclick="return editPet()"/></div>
                 </form>
             </div>

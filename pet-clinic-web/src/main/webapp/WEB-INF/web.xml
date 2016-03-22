@@ -118,7 +118,7 @@
         <url-pattern>/clinic/delpet</url-pattern>
     </servlet-mapping>-->
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>EditClientServlet</servlet-name>
         <servlet-class>org.petclinic.servlets.client.EditClientServlet</servlet-class>
     </servlet>
@@ -126,9 +126,9 @@
     <servlet-mapping>
         <servlet-name>EditClientServlet</servlet-name>
         <url-pattern>/clinic/edit</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>EditPetServlet</servlet-name>
         <servlet-class>org.petclinic.servlets.pet.EditPetServlet</servlet-class>
     </servlet>
@@ -136,7 +136,7 @@
     <servlet-mapping>
         <servlet-name>EditPetServlet</servlet-name>
         <url-pattern>/clinic/editpet</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
     <servlet>
         <servlet-name>SearchClientServlet</servlet-name>

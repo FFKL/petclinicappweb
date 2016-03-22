@@ -54,7 +54,8 @@
             <div class="segment">
             <span>Изменение имени клиента</span>
                 <form id="formname" action="${pageContext.servletContext.contextPath}/clinic/edit" method="POST">
-                    <div class="element"><input type="text" name="client name" id="clientName" placeholder="Введите имя клиента"></div>
+                    <div class="element"><input type="text" name="clientName" id="clientName" placeholder="Введите имя клиента"></div>
+                    <input type="hidden" name="id" value="${client.id}">
                     <div class="element"><input type="button" value="Изменить" onclick="return editClientName()"/></div>
                 </form>
                 <input type="button" value="Удалить клиента" onClick='location.href="${pageContext.servletContext.contextPath}/clinic/delete?id=${client.getId()}"'>
@@ -88,7 +89,7 @@
                             <td>${pet.petName}</td>
                             <td>
                                 <a href="${pageContext.servletContext.contextPath}/clinic/delpet?id=${pet.id}&cid=${pet.client.id}">Delete</a>
-                                <a href="${pageContext.servletContext.contextPath}/clinic/editpet?id=${pet.id}&name=${pet.client.id}">Edit</a>
+                                <a href="${pageContext.servletContext.contextPath}/clinic/editpet?id=${pet.id}<%--&cid=${pet.client.id}--%>">Edit</a>
                             </td>
                         </tr>
                     </c:forEach>

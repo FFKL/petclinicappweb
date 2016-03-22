@@ -72,4 +72,24 @@ public class ClinicViewController {
         storages.petStorage.add(pet);
         return String.format("%s%s", "redirect:client?id=", client.getId());
     }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editClientName(@ModelAttribute Client client) {
+        storages.clientStorage.edit(client);
+        return String.format("%s%s", "redirect:client?id=", client.getId());
+    }
+
+    @RequestMapping(value = "/editpet", method = RequestMethod.GET)
+    public String editPetNameGet(@ModelAttribute Pet pet) {
+        return "clinic/EditPet";
+    }
+
+    @RequestMapping(value = "/editpet", method = RequestMethod.POST)
+    public String editPetName(@ModelAttribute Pet pet) {
+        Pet currentPet = storages.petStorage.get(pet.getId());
+        currentPet.setPetName(pet.getPetName());
+        storages.petStorage.edit(currentPet);
+        return String.format("%s%s", "redirect:client?id=", currentPet.getClient().getId());
+    }
+
 }

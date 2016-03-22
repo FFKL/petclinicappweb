@@ -29,6 +29,7 @@ public class PetStorage implements PetDAO {
         return (int) this.template.save(pet);
     }
 
+    @Transactional
     @Override
     public void edit(Pet edit) {
         this.template.update(edit);
