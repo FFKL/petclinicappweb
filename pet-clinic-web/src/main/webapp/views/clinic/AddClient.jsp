@@ -40,11 +40,11 @@
                 <form id="form" action="${pageContext.servletContext.contextPath}/clinic/create" method="POST">
                     <div class="element-block">
                         <div class="element">Имя клиента: </div>
-                        <div class="element"><input type="text" name="clientName"></div>
+                        <div class="element"><input type="text" name="clientName" id="clientName"></div>
                     </div>
                     <div class="element-block">
                         <div class="element">Имя питомца: </div>
-                        <div class="element"><input type="text" name="petName"></div>
+                        <div class="element"><input type="text" name="petName" id="petName"></div>
                         <div class="element">Тип питомца: </div>
                         <div class="element">
                             <select name="petType">

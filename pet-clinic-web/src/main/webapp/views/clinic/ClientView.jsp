@@ -3,8 +3,8 @@
 <html>
     <head>
         <title>Клиент</title>
-        <link rel="stylesheet" href="../css/style.css">
-        <script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
+        <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript">
             function editClientName() {
                 if (validateClient()) {
@@ -62,14 +62,16 @@
             <div class="segment">
                 <span>Добавление питомца</span>
                 <form id="formpet" action="${pageContext.servletContext.contextPath}/clinic/addpet" method="POST">
-                    <div class="element"><input type="text" name="pet name" id="petName" placeholder="Введите имя питомца"></div>
+                    <div class="element"><input type="text" name="petName" id="petName" placeholder="Введите имя питомца"></div>
                     <div class="element">
-                        <select name="type">
+                        <select name="petType">
                             <option value="Cat">Cat</option>
                             <option value="Dog">Dog</option>
                             <option value="Default">DefaultPet</option>
                         </select>
                     </div>
+                    <input type="hidden" name="id" value="${client.id}">
+                    <input type="hidden" name="clientName" value="${client.clientName}">
                     <div class="element"><input type="button" value="Добавить" onclick="return addPet()"/></div>
                 </form>
             </div>
@@ -82,11 +84,11 @@
                     </tr>
                     <c:forEach items="${pets}" var="pet" varStatus="status">
                         <tr valign="top">
-                            <td>${pet.getPetType()}</td>
-                            <td>${pet.getName()}</td>
+                            <td>${pet.petType}</td>
+                            <td>${pet.petName}</td>
                             <td>
-                                <a href="${pageContext.servletContext.contextPath}/clinic/delpet?id=${client.getId()}&name=${pet.getName()}">Delete</a>
-                                <a href="${pageContext.servletContext.contextPath}/clinic/editpet?id=${client.getId()}&name=${pet.getName()}">Edit</a>
+                                <a href="${pageContext.servletContext.contextPath}/clinic/delpet?id=${pet.id}&cid=${pet.client.id}">Delete</a>
+                                <a href="${pageContext.servletContext.contextPath}/clinic/editpet?id=${pet.id}&name=${pet.client.id}">Edit</a>
                             </td>
                         </tr>
                     </c:forEach>
