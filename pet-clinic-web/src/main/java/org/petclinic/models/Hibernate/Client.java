@@ -1,5 +1,8 @@
 package org.petclinic.models.Hibernate;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import java.util.Set;
 
 public class Client {
@@ -49,26 +52,27 @@ public class Client {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (obj == this) {
+        if (this == obj) {
             return true;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof Client)) {
             return false;
         }
-        Client e = (Client) obj;
-        return (this.getId() == e.getId() && this.getClientName() == e.getClientName() && this.getPets().equals(e.getPets()));
+        Client that = (Client) obj;
+        EqualsBuilder equalsBuilder = new EqualsBuilder();
+        equalsBuilder.append(id, that.id);
+        equalsBuilder.append(clientName, that.clientName);
+        equalsBuilder.append(pets, that.pets);
+        return equalsBuilder.isEquals();
     }
 
     @Override
     public int hashCode() {
-        int result = 5;
-        result = 31*result + this.getClientName().hashCode();
-        result = 31*result + this.getId();
-        result = 31*result + this.getPets().hashCode();
-        return result;
+        HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
+        hashCodeBuilder.append(id);
+        hashCodeBuilder.append(clientName);
+        hashCodeBuilder.append(pets);
+        return hashCodeBuilder.toHashCode();
     }
 
 }

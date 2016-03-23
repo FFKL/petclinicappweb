@@ -1,5 +1,8 @@
 package org.petclinic.models.Hibernate;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 public class Pet {
     private final String FORMAT_STRING = "%s%s%s%s%s%s";
 
@@ -54,26 +57,28 @@ public class Pet {
         return String.format(FORMAT_STRING,"ID: ", this.getId(), "PetType: ", this.getPetType(), "; PetName: ", this.getPetName());
     }
 
-    /*@Override
+    @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (obj == this) {
+        if (this == obj) {
             return true;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof Pet)) {
             return false;
         }
-        Pet e = (Pet) obj;
-        return (this.getPetName() == e.getPetName() && this.getPetType() == e.getPetType() && this.getClient() == e.getClient());
+        Pet that = (Pet) obj;
+        EqualsBuilder equalsBuilder = new EqualsBuilder();
+        equalsBuilder.append(id, that.id);
+        equalsBuilder.append(petName, that.petName);
+        equalsBuilder.append(petType, that.petType);
+        return equalsBuilder.isEquals();
     }
 
     @Override
     public int hashCode() {
-        int result = 5;
-        result = 31*result + this.getPetType().hashCode();
-        result = 31*result + this.getPetName().hashCode();
-        return result;
-    }*/
+        HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
+        hashCodeBuilder.append(id);
+        hashCodeBuilder.append(petName);
+        hashCodeBuilder.append(petType);
+        return hashCodeBuilder.toHashCode();
+    }
 }
