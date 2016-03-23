@@ -138,7 +138,7 @@
         <url-pattern>/clinic/editpet</url-pattern>
     </servlet-mapping>-->
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>SearchClientServlet</servlet-name>
         <servlet-class>org.petclinic.servlets.client.SearchClientServlet</servlet-class>
     </servlet>
@@ -146,5 +146,5 @@
     <servlet-mapping>
         <servlet-name>SearchClientServlet</servlet-name>
         <url-pattern>/clinic/search</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 </web-app>

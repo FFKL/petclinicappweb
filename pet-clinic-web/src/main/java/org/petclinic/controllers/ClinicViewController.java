@@ -38,7 +38,7 @@ public class ClinicViewController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String saveClient(@ModelAttribute Client client, @ModelAttribute Pet pet) {
         Set<Pet> pets = new HashSet<>();
-        if (!pet.getPetName().equals(null)) {
+        if (!pet.getPetName().isEmpty()) {
             pet.setClient(client);
             pets.add(pet);
             client.setPets(pets);
@@ -90,6 +90,20 @@ public class ClinicViewController {
         currentPet.setPetName(pet.getPetName());
         storages.petStorage.edit(currentPet);
         return String.format("%s%s", "redirect:client?id=", currentPet.getClient().getId());
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String clientsSearch(@ModelAttribute Client client, @ModelAttribute Pet pet, ModelMap model) {
+        List<Client> clients = new ArrayList<>();
+        if (!client.getClientName().isEmpty())
+            clients.addAll(storages.clientStorage.getByClientName(client.getClientName()));
+        if (!pet.getPetName().isEmpty())
+            clients.addAll(storages.clientStorage.getClientsByPetName(pet.getPetName()));
+        Set<Client> clientSet = new HashSet<>(clients);
+        clients.clear();
+        clients.addAll(clientSet);
+        model.addAttribute("result", clients);
+        return "clinic/SearchClient";
     }
 
 }

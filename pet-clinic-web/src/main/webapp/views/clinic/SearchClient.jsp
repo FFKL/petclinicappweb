@@ -3,8 +3,8 @@
 <html>
     <head>
         <title>Поиск</title>
-        <link rel="stylesheet" href="../css/style.css">
-        <script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
+        <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript">
             function search() {
                 if (validate()) {
@@ -41,11 +41,11 @@
                 <form id="form" action="${pageContext.servletContext.contextPath}/clinic/search" method="POST">
                     <div class="element" >Owner name: </div>
                     <div class="element">
-                        <input type="text" name="client name" id="clientName">
+                        <input type="text" name="clientName" id="clientName">
                     </div>
                     <div class="element">Pet name: </div>
                     <div class="element">
-                        <input type="text" name="pet name" id="petName">
+                        <input type="text" name="petName" id="petName">
                     </div>
                     <div class="element"><input type="button" value="Поиск" onclick="return search()"/></div>
                 </form>
@@ -61,8 +61,8 @@
                     <c:forEach items="${result}" var="result" varStatus="status">
                         <tr valign="top">
                             <td><a href="${pageContext.servletContext.contextPath}/clinic/client?id=${result.getId()}">${result.getId()}</a></td>
-                            <td>${result.getClientName()}</td>
-                            <td>${result.getPets().size()}</td>
+                            <td>${result.clientName}</td>
+                            <td>${result.pets.size()}</td>
                         </tr>
                     </c:forEach>
                 </table>

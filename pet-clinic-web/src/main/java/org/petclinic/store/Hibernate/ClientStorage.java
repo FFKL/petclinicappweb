@@ -63,6 +63,10 @@ public class ClientStorage implements ClientDAO {
         return (List<Client>) this.template.find("from Client where name=?", clientName);
     }
 
+    public List<Client> getClientsByPetName(final String petName) {
+        return (List<Client>) this.template.find("select clients from Client clients, Pet pets where pets.petName=? and pets.client.id=clients.id", petName);
+    }
+
     public List<Client> searchByClientName(final String clientName) {
         return null;
     }

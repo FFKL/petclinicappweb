@@ -68,4 +68,8 @@ public class PetStorage implements PetDAO {
     public void close() {
 
     }
+
+    public List<Pet> getByPetName(final String petName) {
+        return (List<Pet>) this.template.find("from Client where name=?", petName);
+    }
 }
