@@ -1,6 +1,5 @@
 package org.petclinic.controllers;
 
-import com.sun.deploy.net.HttpRequest;
 import org.petclinic.models.Hibernate.Client;
 import org.petclinic.models.Hibernate.Pet;
 import org.petclinic.store.Hibernate.Storages;
@@ -10,9 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

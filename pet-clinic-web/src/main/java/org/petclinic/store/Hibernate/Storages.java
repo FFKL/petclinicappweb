@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 public class Storages {
     public final ClientDAO clientStorage;
     public final PetDAO petStorage;
+    public final UserDAO userStorage;
 
     @Autowired
-    public Storages(final ClientDAO clientStorage, final PetDAO petStorage) {
+    public Storages(final ClientDAO clientStorage, final PetDAO petStorage, final UserDAO userStorage) {
         this.clientStorage = clientStorage;
         this.petStorage = petStorage;
+        this.userStorage = userStorage;
     }
 }

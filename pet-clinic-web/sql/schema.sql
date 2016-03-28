@@ -1,4 +1,3 @@
-/*
 -- roles
 create table roles (
 		uid serial primary key,
@@ -10,9 +9,10 @@ create table users (
 		uid serial primary key,
 		login varchar(200),
 		email varchar(200),
-		role_id int not null references roles(uid)
+		role_id int not null references roles(uid),
+		client_id int null references clients(uid)
 );
-
+/*
 -- messages
 create table messages (
 		uid serial primary key,

@@ -25,5 +25,7 @@
         <!-- MyClinic mapping -->
         <mapping resource="org/petclinic/models/Client.hbm.xml"/>
         <mapping resource="org/petclinic/models/Pet.hbm.xml"/>
+        <mapping resource="org/petclinic/models/User.hbm.xml"/>
+        <mapping resource="org/petclinic/models/Role.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

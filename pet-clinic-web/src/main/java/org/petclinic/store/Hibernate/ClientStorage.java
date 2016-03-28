@@ -16,7 +16,7 @@ public class ClientStorage implements ClientDAO {
     private final HibernateTemplate template;
 
     @Autowired
-    public ClientStorage(final org.springframework.orm.hibernate4.HibernateTemplate template) {
+    public ClientStorage(final HibernateTemplate template) {
         this.template = template;
     }
 

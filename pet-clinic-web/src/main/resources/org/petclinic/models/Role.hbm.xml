@@ -3,9 +3,9 @@
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="org.petclinic.models.Role" table="role">
+    <class name="org.petclinic.models.Hibernate.Role" table="roles" lazy="false">
         <meta attribute="class=description">
-            This class contains the client detail.
+            This class contains the role detail.
         </meta>
         <id name="id" type="int" column="uid">
             <generator class="identity"/>
