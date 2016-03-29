@@ -6,15 +6,20 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
+    <http pattern="/login" security="none" />
     <http auto-config="true" use-expressions="true">
-    <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
-    <!--<intercept-url pattern="/**" access="hasRole('ROLE_SUPERADMIN')" />-->
-        <!--<form-login-->
-        <!--login-page="/login"-->
-        <!--default-target-url="/admin/roles"-->
-        <!--authentication-failure-url="/login?error"/>-->
+    <intercept-url pattern="/clinic/*" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <!--<intercept-url pattern="/clinic/*" access="hasRole('ROLE_USER')"/>-->
+    <!--<intercept-url pattern="/clinic/*" access="hasRole('ROLE_SUPERADMIN')" />-->
+        <form-login
+        login-page="/login"
+        login-processing-url="/j_spring_security_check"
+        username-parameter="username"
+        password-parameter="password"
+        authentication-failure-url="/login"/>
         <!--<logout logout-success-url="/login?logout" />-->
-        <!--<csrf disabled="true"/>-->
+        <csrf disabled="true"/>
     </http>
 
     <authentication-manager>
