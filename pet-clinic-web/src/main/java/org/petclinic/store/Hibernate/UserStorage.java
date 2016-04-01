@@ -4,6 +4,7 @@ import org.petclinic.models.Hibernate.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,9 +30,10 @@ public class UserStorage implements UserDAO {
         return (List<User>) this.template.find("from User");
     }
 
+    @Transactional
     @Override
-    public int add(User add) {
-        return 0;
+    public int add(User user) {
+        return (int) this.template.save(user);
     }
 
     @Override
@@ -39,9 +41,12 @@ public class UserStorage implements UserDAO {
 
     }
 
+    @Transactional
     @Override
     public void delete(int id) {
-
+        User user = new User();
+        user.setId(id);
+        this.template.delete(user);
     }
 
     @Override

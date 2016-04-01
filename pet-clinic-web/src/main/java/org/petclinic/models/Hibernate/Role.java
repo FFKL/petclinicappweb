@@ -8,6 +8,10 @@ public class Role {
 
     }
 
+    public Role(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

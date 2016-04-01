@@ -20,8 +20,10 @@
             </div>
         </div>
         <div class="container">
-      <div class="button"><a href="${pageContext.servletContext.contextPath}/clinic/create">Добавить клиента</a></div>
+            <div class="button"><a href="${pageContext.servletContext.contextPath}/clinic/create">Добавить клиента</a></div>
             <div class="button"><a href="${pageContext.servletContext.contextPath}/views/clinic/SearchClient.jsp">Поиск</a></div>
+            <div class="button"><a href="${pageContext.servletContext.contextPath}/superadmin">Управление пользователями</a></div>
+            <div class="button"><a href="${pageContext.servletContext.contextPath}/logout">Выйти</a></div>
         </div>
         <div class="container">
             <div class="segment">
